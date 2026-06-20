@@ -20,7 +20,9 @@ export default async function handler(req, res) {
             [
               {
                 text: "⭐ Earn Stars",
-                url: "https://earn-stars-app.vercel.app"
+                web_app: {
+  url: "https://earn-stars-app.vercel.app"
+                }
               }
             ]
           ]
