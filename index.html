@@ -9,56 +9,180 @@
 
 <style>
 body{
-  background:#0f172a;
-  color:white;
+  margin:0;
   font-family:sans-serif;
+  background:#0b1220;
+  color:white;
+}
+
+/* HEADER */
+header{
   text-align:center;
-  padding-top:80px;
+  padding:15px;
+  font-size:20px;
+  background:#111a2e;
+  border-bottom:1px solid #2b3a55;
 }
 
+/* ADS */
+.ads{
+  margin:10px;
+  background:#1f2a44;
+  padding:15px;
+  border-radius:12px;
+  text-align:center;
+  border:1px solid gold;
+}
+
+/* GRID MENU */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:10px;
+}
+
+/* CARD */
 .card{
-  background:#1e293b;
-  margin:20px;
-  padding:20px;
-  border-radius:15px;
+  background:#16213a;
+  padding:15px;
+  border-radius:12px;
+  text-align:center;
+  border:1px solid #2b3a55;
 }
 
-button{
-  padding:15px 25px;
-  font-size:18px;
-  border:none;
+/* TASKS */
+#tasks{
+  padding:10px;
+}
+
+.task{
+  background:#121a2c;
+  padding:12px;
+  margin-bottom:10px;
   border-radius:10px;
+  border:1px solid #2b3a55;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* BUTTON */
+button{
+  padding:10px;
+  border:none;
+  border-radius:8px;
   background:gold;
   font-weight:bold;
+  cursor:pointer;
+}
+
+/* BOTTOM MENU */
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-around;
+  background:#111a2e;
+  padding:10px;
+  border-top:1px solid #2b3a55;
+  font-size:12px;
+}
+
+.bottom div{
+  text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<h1>⭐ Earn Stars</h1>
+<header>⭐ Earn Stars</header>
 
-<div class="card">
-  <p>👤 المستخدم: <span id="name">...</span></p>
-  <p>💰 الرصيد: <span id="balance">0</span></p>
+<!-- ADS -->
+<div class="ads">
+  🎁 شاهد إعلان واربح نقاط
+  <br><br>
+  <button onclick="watchAd()">تشغيل الإعلان +2 ⭐</button>
 </div>
 
-<button onclick="addReward()">🎁 احصل على مكافأة</button>
+<!-- PROFILE / GAMES -->
+<div class="grid">
+
+  <div class="card">
+    👤 الملف الشخصي
+    <p>الرصيد: <span id="balance">0</span></p>
+  </div>
+
+  <div class="card">
+    🎮 الألعاب
+    <button onclick="game()">لعب (+/- نقاط)</button>
+  </div>
+
+</div>
+
+<!-- MINING / TASKS -->
+<div class="grid">
+
+  <div class="card">
+    ⛏ التعدين
+    <button onclick="mine()">ابدأ +1 ⭐</button>
+  </div>
+
+  <div class="card">
+    🎁 المهمات
+    <button onclick="showTasks()">عرض المهمات</button>
+  </div>
+
+</div>
+
+<!-- TASKS -->
+<div id="tasks" class="section">
+
+  <div class="card">
+    🎁 المهمات اليومية
+  </div>
+
+  <div class="task">
+    <span>📢 اشترك في القناة</span>
+    <button onclick="task1()">+3 ⭐</button>
+  </div>
+
+  <div class="task">
+    <span>👀 شاهد فيديو</span>
+    <button onclick="task2()">+2 ⭐</button>
+  </div>
+
+  <div class="task">
+    <span>🔗 افتح رابط</span>
+    <button onclick="task3()">+1 ⭐</button>
+  </div>
+
+</div>
+
+<!-- BOTTOM MENU -->
+<div class="bottom">
+  <div>👤</div>
+  <div>🎮</div>
+  <div>🎁</div>
+  <div>⛏</div>
+</div>
 
 <script>
 const tg = window.Telegram.WebApp;
 tg.expand();
 
-const user = tg.initDataUnsafe.user || {id: "test", first_name: "Guest"};
+const user = tg.initDataUnsafe.user || {id:"test", first_name:"Guest"};
 
 let data = {
-  id: user.id,
-  name: user.first_name,
-  balance: 0
+  id:user.id,
+  name:user.first_name,
+  balance:0
 };
 
-// تحميل البيانات
-if (!localStorage.getItem(user.id)) {
+if(!localStorage.getItem(user.id)){
   localStorage.setItem(user.id, JSON.stringify(data));
 }
 
@@ -72,15 +196,66 @@ function saveUser(u){
 
 function updateUI(){
   let u = getUser();
-  document.getElementById("name").innerText = u.name;
   document.getElementById("balance").innerText = u.balance;
 }
 
-function addReward(){
+/* ADS */
+function watchAd(){
   let u = getUser();
-  u.balance += 1; // نقطة وحدة حالياً
+  u.balance += 2;
   saveUser(u);
   updateUI();
+}
+
+/* GAME */
+function game(){
+  let u = getUser();
+  if(Math.random() > 0.5){
+    u.balance += 3;
+    alert("🎉 فزت!");
+  } else {
+    u.balance -= 1;
+    alert("😢 خسرت");
+  }
+  saveUser(u);
+  updateUI();
+}
+
+/* MINING */
+function mine(){
+  let u = getUser();
+  u.balance += 1;
+  saveUser(u);
+  updateUI();
+}
+
+/* TASKS */
+function showTasks(){
+  document.getElementById("tasks").scrollIntoView({behavior:"smooth"});
+}
+
+function task1(){
+  let u = getUser();
+  u.balance += 3;
+  saveUser(u);
+  updateUI();
+  window.open("https://t.me/yourchannel");
+}
+
+function task2(){
+  let u = getUser();
+  u.balance += 2;
+  saveUser(u);
+  updateUI();
+  window.open("https://youtube.com");
+}
+
+function task3(){
+  let u = getUser();
+  u.balance += 1;
+  saveUser(u);
+  updateUI();
+  window.open("https://google.com");
 }
 
 updateUI();
