@@ -3,15 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Earn Stars</title>
+<title>⭐ Earn Stars PRO MAX</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
 
 <style>
 body{
   margin:0;
   font-family:sans-serif;
-  background:#0b1220;
+  background:#05070f;
   color:white;
 }
 
@@ -19,246 +21,272 @@ body{
 header{
   text-align:center;
   padding:15px;
+  background:#0b0f1c;
+  color:gold;
   font-size:20px;
-  background:#111a2e;
-  border-bottom:1px solid #2b3a55;
+  border-bottom:1px solid #222;
 }
 
-/* ADS */
-.ads{
-  margin:10px;
-  background:#1f2a44;
+/* PAGES */
+.page{
+  display:none;
+  padding:10px;
+  height:calc(100vh - 120px);
+  overflow:auto;
+}
+.active{display:block}
+
+/* CARD */
+.card{
+  background:#111827;
   padding:15px;
   border-radius:12px;
-  text-align:center;
-  border:1px solid gold;
+  margin-bottom:10px;
+  border:1px solid #2a2a2a;
 }
 
-/* GRID MENU */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
-  padding:10px;
 }
 
-/* CARD */
-.card{
-  background:#16213a;
-  padding:15px;
-  border-radius:12px;
-  text-align:center;
-  border:1px solid #2b3a55;
-}
-
-/* TASKS */
-#tasks{
-  padding:10px;
-}
-
+/* TASK */
 .task{
-  background:#121a2c;
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:10px;
-  border:1px solid #2b3a55;
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  padding:12px;
+  margin-bottom:8px;
+  background:#121a2c;
+  border-radius:10px;
+  border:1px solid #2b3a55;
 }
 
 /* BUTTON */
 button{
-  padding:10px;
+  width:100%;
+  padding:12px;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
   background:gold;
   font-weight:bold;
+}
+
+/* NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  background:#0b0f1c;
+  border-top:1px solid #222;
+}
+
+.nav div{
+  flex:1;
+  text-align:center;
+  padding:12px;
   cursor:pointer;
 }
 
-/* BOTTOM MENU */
-.bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  display:flex;
-  justify-content:space-around;
-  background:#111a2e;
-  padding:10px;
-  border-top:1px solid #2b3a55;
-  font-size:12px;
-}
-
-.bottom div{
-  text-align:center;
+.nav div.active{
+  color:gold;
 }
 </style>
 </head>
 
 <body>
 
-<header>⭐ Earn Stars</header>
+<header>⭐ Earn Stars PRO MAX</header>
 
-<!-- ADS -->
-<div class="ads">
-  🎁 شاهد إعلان واربح نقاط
-  <br><br>
-  <button onclick="watchAd()">تشغيل الإعلان +2 ⭐</button>
-</div>
+<!-- HOME -->
+<div id="home" class="page active">
+  <div class="card">👤 الاسم: <span id="name"></span></div>
+  <div class="card">⭐ النجوم: <span id="stars">0</span></div>
+  <div class="card">🔥 المستوى: <span id="level">1</span></div>
 
-<!-- PROFILE / GAMES -->
-<div class="grid">
+  <div class="grid">
+    <div class="card">
+      🎮 لعبة
+      <button onclick="game()">ابدأ</button>
+    </div>
 
-  <div class="card">
-    👤 الملف الشخصي
-    <p>الرصيد: <span id="balance">0</span></p>
+    <div class="card">
+      ⛏ تعدين
+      <button onclick="mine()">تعدين</button>
+    </div>
   </div>
-
-  <div class="card">
-    🎮 الألعاب
-    <button onclick="game()">لعب (+/- نقاط)</button>
-  </div>
-
-</div>
-
-<!-- MINING / TASKS -->
-<div class="grid">
-
-  <div class="card">
-    ⛏ التعدين
-    <button onclick="mine()">ابدأ +1 ⭐</button>
-  </div>
-
-  <div class="card">
-    🎁 المهمات
-    <button onclick="showTasks()">عرض المهمات</button>
-  </div>
-
 </div>
 
 <!-- TASKS -->
-<div id="tasks" class="section">
+<div id="tasks" class="page">
+  <div class="card">🎁 مهمات يومية</div>
 
-  <div class="card">
-    🎁 المهمات اليومية
+  <div class="task">
+    <span>📢 قناة</span>
+    <button onclick="task(3)">+3</button>
   </div>
 
   <div class="task">
-    <span>📢 اشترك في القناة</span>
-    <button onclick="task1()">+3 ⭐</button>
+    <span>👀 فيديو</span>
+    <button onclick="task(2)">+2</button>
   </div>
 
   <div class="task">
-    <span>👀 شاهد فيديو</span>
-    <button onclick="task2()">+2 ⭐</button>
+    <span>🔗 رابط</span>
+    <button onclick="task(1)">+1</button>
   </div>
-
-  <div class="task">
-    <span>🔗 افتح رابط</span>
-    <button onclick="task3()">+1 ⭐</button>
-  </div>
-
 </div>
 
-<!-- BOTTOM MENU -->
-<div class="bottom">
-  <div>👤</div>
-  <div>🎮</div>
-  <div>🎁</div>
-  <div>⛏</div>
+<!-- SHOP -->
+<div id="shop" class="page">
+  <div class="card">🛒 متجر المكافآت</div>
+
+  <div class="task">
+    <span>💎 50 نجمة</span>
+    <button onclick="buy(50)">شراء</button>
+  </div>
+
+  <div class="task">
+    <span>💎 100 نجمة</span>
+    <button onclick="buy(100)">شراء</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div id="stats" class="page">
+  <div class="card">📊 الإحصائيات</div>
+  <div class="card">عدد الألعاب: <span id="gcount">0</span></div>
+  <div class="card">عدد المهمات: <span id="tcount">0</span></div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div onclick="show('home')">🏠</div>
+  <div onclick="show('tasks')">🎁</div>
+  <div onclick="show('shop')">🛒</div>
+  <div onclick="show('stats')">📊</div>
 </div>
 
 <script>
+
+/* TELEGRAM */
 const tg = window.Telegram.WebApp;
 tg.expand();
 
-const user = tg.initDataUnsafe.user || {id:"test", first_name:"Guest"};
+const user = tg.initDataUnsafe.user || {id:"0", first_name:"Guest"};
 
-let data = {
-  id:user.id,
-  name:user.first_name,
-  balance:0
+/* FIREBASE CONFIG (ضعه انت) */
+const firebaseConfig = {
+  apiKey:"XXX",
+  projectId:"XXX",
 };
 
-if(!localStorage.getItem(user.id)){
-  localStorage.setItem(user.id, JSON.stringify(data));
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+/* STATE */
+let uid = String(user.id);
+
+/* LOAD USER */
+async function load(){
+  let ref = db.collection("users").doc(uid);
+  let doc = await ref.get();
+
+  if(!doc.exists){
+    await ref.set({
+      name:user.first_name,
+      stars:0,
+      level:1,
+      games:0,
+      tasks:0,
+      lastMine:0
+    });
+  }
+
+  update();
 }
 
-function getUser(){
-  return JSON.parse(localStorage.getItem(user.id));
+/* UPDATE */
+async function update(){
+  let doc = await db.collection("users").doc(uid).get();
+  let d = doc.data();
+
+  document.getElementById("name").innerText = d.name;
+  document.getElementById("stars").innerText = d.stars;
+  document.getElementById("level").innerText = d.level;
+  document.getElementById("gcount").innerText = d.games;
+  document.getElementById("tcount").innerText = d.tasks;
 }
 
-function saveUser(u){
-  localStorage.setItem(user.id, JSON.stringify(u));
-}
-
-function updateUI(){
-  let u = getUser();
-  document.getElementById("balance").innerText = u.balance;
-}
-
-/* ADS */
-function watchAd(){
-  let u = getUser();
-  u.balance += 2;
-  saveUser(u);
-  updateUI();
+/* SHOW PAGE */
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
 /* GAME */
-function game(){
-  let u = getUser();
-  if(Math.random() > 0.5){
-    u.balance += 3;
-    alert("🎉 فزت!");
-  } else {
-    u.balance -= 1;
-    alert("😢 خسرت");
+async function game(){
+  let ref = db.collection("users").doc(uid);
+  let d = (await ref.get()).data();
+
+  d.games++;
+
+  if(Math.random()>0.5) d.stars += 1;
+  else d.stars -= 0.5;
+
+  await ref.set(d);
+  update();
+}
+
+/* MINE DAILY */
+async function mine(){
+  let ref = db.collection("users").doc(uid);
+  let d = (await ref.get()).data();
+
+  let now = Date.now();
+  let day = 86400000;
+
+  if(now - d.lastMine > day){
+    d.stars += 0.0005;
+    d.lastMine = now;
   }
-  saveUser(u);
-  updateUI();
+
+  await ref.set(d);
+  update();
 }
 
-/* MINING */
-function mine(){
-  let u = getUser();
-  u.balance += 1;
-  saveUser(u);
-  updateUI();
+/* TASK */
+async function task(val){
+  let ref = db.collection("users").doc(uid);
+  let d = (await ref.get()).data();
+
+  d.tasks++;
+  d.stars += val;
+
+  await ref.set(d);
+  update();
 }
 
-/* TASKS */
-function showTasks(){
-  document.getElementById("tasks").scrollIntoView({behavior:"smooth"});
+/* BUY */
+async function buy(c){
+  let ref = db.collection("users").doc(uid);
+  let d = (await ref.get()).data();
+
+  if(d.stars >= c){
+    d.stars -= c;
+    alert("تم الشراء");
+  } else {
+    alert("رصيدك ضعيف");
+  }
+
+  await ref.set(d);
+  update();
 }
 
-function task1(){
-  let u = getUser();
-  u.balance += 3;
-  saveUser(u);
-  updateUI();
-  window.open("https://t.me/yourchannel");
-}
+load();
 
-function task2(){
-  let u = getUser();
-  u.balance += 2;
-  saveUser(u);
-  updateUI();
-  window.open("https://youtube.com");
-}
-
-function task3(){
-  let u = getUser();
-  u.balance += 1;
-  saveUser(u);
-  updateUI();
-  window.open("https://google.com");
-}
-
-updateUI();
 </script>
 
 </body>
