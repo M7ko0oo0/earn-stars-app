@@ -4,28 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Earn Stars</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <style>
 body{
-background:#111;
-color:white;
-font-family:sans-serif;
-text-align:center;
-padding-top:100px;
+  background:#0f172a;
+  color:white;
+  font-family:sans-serif;
+  text-align:center;
+  padding-top:80px;
 }
+
+.card{
+  background:#1e293b;
+  margin:20px;
+  padding:20px;
+  border-radius:15px;
+}
+
 button{
-padding:15px 30px;
-font-size:20px;
-border:none;
-border-radius:10px;
+  padding:15px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  background:gold;
+  font-weight:bold;
 }
 </style>
 </head>
+
 <body>
 
 <h1>⭐ Earn Stars</h1>
-<p>أول صفحة داخل التليكرام</p>
 
-<button>احصل على المكافأة</button>
+<div class="card">
+  <p>👤 المستخدم: <span id="name">...</span></p>
+  <p>💰 الرصيد: <span id="balance">0</span></p>
+</div>
+
+<button onclick="addReward()">🎁 احصل على مكافأة</button>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.expand();
+
+const user = tg.initDataUnsafe.user || {id: "test", first_name: "Guest"};
+
+let data = {
+  id: user.id,
+  name: user.first_name,
+  balance: 0
+};
+
+// تحميل البيانات
+if (!localStorage.getItem(user.id)) {
+  localStorage.setItem(user.id, JSON.stringify(data));
+}
+
+function getUser(){
+  return JSON.parse(localStorage.getItem(user.id));
+}
+
+function saveUser(u){
+  localStorage.setItem(user.id, JSON.stringify(u));
+}
+
+function updateUI(){
+  let u = getUser();
+  document.getElementById("name").innerText = u.name;
+  document.getElementById("balance").innerText = u.balance;
+}
+
+function addReward(){
+  let u = getUser();
+  u.balance += 1; // نقطة وحدة حالياً
+  saveUser(u);
+  updateUI();
+}
+
+updateUI();
+</script>
 
 </body>
 </html>
