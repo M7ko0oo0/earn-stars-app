@@ -3,64 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⭐ Earn Stars PRO MAX</title>
+<title>⭐ Earn Stars Space PRO V3</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
 
 <style>
 body{
   margin:0;
   font-family:sans-serif;
-  background:#05070f;
+  background:#000;
   color:white;
+  overflow:hidden;
+}
+
+/* SPACE BACKGROUND */
+#space{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at top, #0b0f2a, #000);
+  z-index:-2;
+}
+
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:gold;
+  border-radius:50%;
+  animation:move linear infinite;
+}
+
+@keyframes move{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(100vh);opacity:0;}
 }
 
 /* HEADER */
 header{
   text-align:center;
-  padding:15px;
-  background:#0b0f1c;
+  padding:10px;
   color:gold;
-  font-size:20px;
-  border-bottom:1px solid #222;
+  font-size:18px;
+}
+
+/* CENTER EFFECT */
+#center{
+  position:fixed;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  pointer-events:none;
+}
+
+#fx{
+  font-size:40px;
+  text-shadow:0 0 20px gold;
+  opacity:0.7;
 }
 
 /* PAGES */
 .page{
   display:none;
+  position:fixed;
+  bottom:70px;
+  left:0;
+  right:0;
+  height:65vh;
   padding:10px;
-  height:calc(100vh - 120px);
   overflow:auto;
+  background:rgba(10,15,30,0.7);
+  backdrop-filter:blur(10px);
+  border-top-left-radius:20px;
+  border-top-right-radius:20px;
 }
 .active{display:block}
 
 /* CARD */
 .card{
   background:#111827;
-  padding:15px;
-  border-radius:12px;
+  padding:12px;
   margin-bottom:10px;
-  border:1px solid #2a2a2a;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+  border-radius:12px;
 }
 
 /* TASK */
 .task{
   display:flex;
   justify-content:space-between;
-  padding:12px;
+  padding:10px;
   margin-bottom:8px;
   background:#121a2c;
   border-radius:10px;
-  border:1px solid #2b3a55;
 }
 
 /* BUTTON */
@@ -68,8 +104,8 @@ button{
   width:100%;
   padding:12px;
   border:none;
-  border-radius:10px;
-  background:gold;
+  border-radius:12px;
+  background:linear-gradient(45deg,gold,orange);
   font-weight:bold;
 }
 
@@ -80,7 +116,6 @@ button{
   width:100%;
   display:flex;
   background:#0b0f1c;
-  border-top:1px solid #222;
 }
 
 .nav div{
@@ -89,34 +124,26 @@ button{
   padding:12px;
   cursor:pointer;
 }
-
-.nav div.active{
-  color:gold;
-}
 </style>
 </head>
 
 <body>
 
-<header>⭐ Earn Stars PRO MAX</header>
+<div id="space"></div>
+
+<div id="center"><div id="fx">⭐</div></div>
+
+<header>⭐ SPACE EARN STARS V3</header>
 
 <!-- HOME -->
 <div id="home" class="page active">
   <div class="card">👤 الاسم: <span id="name"></span></div>
-  <div class="card">⭐ النجوم: <span id="stars">0</span></div>
+  <div class="card">⭐ الرصيد: <span id="stars">0</span></div>
   <div class="card">🔥 المستوى: <span id="level">1</span></div>
 
-  <div class="grid">
-    <div class="card">
-      🎮 لعبة
-      <button onclick="game()">ابدأ</button>
-    </div>
-
-    <div class="card">
-      ⛏ تعدين
-      <button onclick="mine()">تعدين</button>
-    </div>
-  </div>
+  <button onclick="mine()">⛏ تعدين يومي</button>
+  <br><br>
+  <button onclick="adReward()">📺 مشاهدة إعلان</button>
 </div>
 
 <!-- TASKS -->
@@ -124,41 +151,40 @@ button{
   <div class="card">🎁 مهمات يومية</div>
 
   <div class="task">
-    <span>📢 قناة</span>
+    <span>📢 اشتراك قناة</span>
     <button onclick="task(3)">+3</button>
   </div>
 
   <div class="task">
-    <span>👀 فيديو</span>
+    <span>👀 مشاهدة فيديو</span>
     <button onclick="task(2)">+2</button>
   </div>
 
   <div class="task">
-    <span>🔗 رابط</span>
+    <span>🔗 فتح رابط</span>
     <button onclick="task(1)">+1</button>
   </div>
 </div>
 
 <!-- SHOP -->
 <div id="shop" class="page">
-  <div class="card">🛒 متجر المكافآت</div>
+  <div class="card">🛒 متجر</div>
 
   <div class="task">
-    <span>💎 50 نجمة</span>
+    <span>💎 50 Stars</span>
     <button onclick="buy(50)">شراء</button>
   </div>
 
   <div class="task">
-    <span>💎 100 نجمة</span>
+    <span>💎 100 Stars</span>
     <button onclick="buy(100)">شراء</button>
   </div>
 </div>
 
-<!-- STATS -->
-<div id="stats" class="page">
-  <div class="card">📊 الإحصائيات</div>
-  <div class="card">عدد الألعاب: <span id="gcount">0</span></div>
-  <div class="card">عدد المهمات: <span id="tcount">0</span></div>
+<!-- WITHDRAW -->
+<div id="withdraw" class="page">
+  <div class="card">💳 سحب الأرباح</div>
+  <button onclick="withdraw()">طلب سحب</button>
 </div>
 
 <!-- NAV -->
@@ -166,128 +192,103 @@ button{
   <div onclick="show('home')">🏠</div>
   <div onclick="show('tasks')">🎁</div>
   <div onclick="show('shop')">🛒</div>
-  <div onclick="show('stats')">📊</div>
+  <div onclick="show('withdraw')">💳</div>
 </div>
 
 <script>
 
-/* TELEGRAM */
 const tg = window.Telegram.WebApp;
 tg.expand();
 
 const user = tg.initDataUnsafe.user || {id:"0", first_name:"Guest"};
+let uid = user.id;
 
-/* FIREBASE CONFIG (ضعه انت) */
-const firebaseConfig = {
-  apiKey:"XXX",
-  projectId:"XXX",
+/* LOCAL DATA (بدون backend حالياً) */
+let data = {
+  name:user.first_name,
+  stars:0,
+  level:1,
+  lastMine:0
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-/* STATE */
-let uid = String(user.id);
-
-/* LOAD USER */
-async function load(){
-  let ref = db.collection("users").doc(uid);
-  let doc = await ref.get();
-
-  if(!doc.exists){
-    await ref.set({
-      name:user.first_name,
-      stars:0,
-      level:1,
-      games:0,
-      tasks:0,
-      lastMine:0
-    });
+/* SPACE STARS */
+function createStars(){
+  let s=document.getElementById("space");
+  for(let i=0;i<120;i++){
+    let d=document.createElement("div");
+    d.className="star";
+    d.style.left=Math.random()*100+"%";
+    d.style.top=Math.random()*100+"%";
+    d.style.animationDuration=(Math.random()*5+2)+"s";
+    s.appendChild(d);
   }
+}
+createStars();
 
-  update();
+/* UI */
+function update(){
+  document.getElementById("name").innerText=data.name;
+  document.getElementById("stars").innerText=data.stars;
+  document.getElementById("level").innerText=Math.floor(data.stars/10)+1;
+
+  let fx=document.getElementById("fx");
+  let s=Math.floor(data.stars);
+
+  if(s<1) fx.innerHTML="⭐";
+  else if(s<5) fx.innerHTML="⭐ ⭐";
+  else if(s<10) fx.innerHTML="✨⭐✨";
+  else fx.innerHTML="🚀✨⭐🚀";
 }
 
-/* UPDATE */
-async function update(){
-  let doc = await db.collection("users").doc(uid).get();
-  let d = doc.data();
-
-  document.getElementById("name").innerText = d.name;
-  document.getElementById("stars").innerText = d.stars;
-  document.getElementById("level").innerText = d.level;
-  document.getElementById("gcount").innerText = d.games;
-  document.getElementById("tcount").innerText = d.tasks;
-}
-
-/* SHOW PAGE */
+/* NAV */
 function show(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-/* GAME */
-async function game(){
-  let ref = db.collection("users").doc(uid);
-  let d = (await ref.get()).data();
-
-  d.games++;
-
-  if(Math.random()>0.5) d.stars += 1;
-  else d.stars -= 0.5;
-
-  await ref.set(d);
-  update();
-}
-
-/* MINE DAILY */
-async function mine(){
-  let ref = db.collection("users").doc(uid);
-  let d = (await ref.get()).data();
-
-  let now = Date.now();
-  let day = 86400000;
-
-  if(now - d.lastMine > day){
-    d.stars += 0.0005;
-    d.lastMine = now;
+/* MINE */
+function mine(){
+  let now=Date.now();
+  if(now-data.lastMine>86400000){
+    data.stars+=0.0005;
+    data.lastMine=now;
   }
-
-  await ref.set(d);
   update();
 }
 
-/* TASK */
-async function task(val){
-  let ref = db.collection("users").doc(uid);
-  let d = (await ref.get()).data();
-
-  d.tasks++;
-  d.stars += val;
-
-  await ref.set(d);
+/* ADS */
+function adReward(){
+  data.stars+=0.01;
   update();
 }
 
-/* BUY */
-async function buy(c){
-  let ref = db.collection("users").doc(uid);
-  let d = (await ref.get()).data();
+/* TASKS */
+function task(v){
+  data.stars+=v;
+  update();
+}
 
-  if(d.stars >= c){
-    d.stars -= c;
+/* SHOP */
+function buy(c){
+  if(data.stars>=c){
+    data.stars-=c;
     alert("تم الشراء");
-  } else {
-    alert("رصيدك ضعيف");
-  }
-
-  await ref.set(d);
+  }else alert("رصيد ضعيف");
   update();
 }
 
-load();
+/* WITHDRAW */
+function withdraw(){
+  if(data.stars>=10){
+    alert("تم إرسال طلب السحب (قيد المراجعة)");
+  }else{
+    alert("الحد الأدنى 10 Stars");
+  }
+}
+
+update();
 
 </script>
 
 </body>
-</html>
+  </html>
