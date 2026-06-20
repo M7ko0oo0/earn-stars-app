@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   const text = body.message.text;
 
   if (text === "/start") {
-    await fetch(`https://api.telegram.org/botYOUR_TOKEN/sendMessage`, {
+    await fetch(`https://api.telegram.org/bot8803450557:AAECYD6WZcz2fUzd_w82z6KMI-sWbO2Cvfo/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
