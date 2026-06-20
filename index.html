@@ -2,293 +2,178 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⭐ Earn Stars Space PRO V3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>⭐ Earn Stars ULTRA SPACE</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
-body{
+
+/* ================= BODY ================= */
+html,body{
   margin:0;
-  font-family:sans-serif;
-  background:#000;
-  color:white;
+  height:100%;
   overflow:hidden;
+  font-family:sans-serif;
 }
 
-/* SPACE BACKGROUND */
-#space{
+/* 🌌 REAL SPACE IMAGE */
+body{
+  background:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564') no-repeat center center fixed;
+  background-size:cover;
+}
+
+/* 🌑 DARK OVERLAY */
+#overlay{
   position:fixed;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
-  background:radial-gradient(circle at top, #0b0f2a, #000);
-  z-index:-2;
+  background:rgba(0,0,0,0.65);
+  z-index:-1;
 }
 
+/* ⭐ STARS */
 .star{
   position:absolute;
   width:2px;
   height:2px;
-  background:gold;
+  background:white;
   border-radius:50%;
-  animation:move linear infinite;
-}
-
-@keyframes move{
-  from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(100vh);opacity:0;}
-}
-
-/* HEADER */
-header{
-  text-align:center;
-  padding:10px;
-  color:gold;
-  font-size:18px;
-}
-
-/* CENTER EFFECT */
-#center{
-  position:fixed;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  pointer-events:none;
-}
-
-#fx{
-  font-size:40px;
-  text-shadow:0 0 20px gold;
   opacity:0.7;
+  animation:fall linear infinite;
 }
 
-/* PAGES */
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
+}
+
+/* ================= MAIN PANEL ================= */
 .page{
-  display:none;
   position:fixed;
   bottom:70px;
-  left:0;
-  right:0;
-  height:65vh;
-  padding:10px;
-  overflow:auto;
-  background:rgba(10,15,30,0.7);
-  backdrop-filter:blur(10px);
-  border-top-left-radius:20px;
-  border-top-right-radius:20px;
-}
-.active{display:block}
+  left:10px;
+  right:10px;
+  padding:12px;
+  border-radius:18px;
 
-/* CARD */
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(255,255,255,0.15);
+  color:white;
+}
+
+/* ================= CARDS ================= */
 .card{
-  background:#111827;
   padding:12px;
   margin-bottom:10px;
   border-radius:12px;
+  background:rgba(0,0,0,0.4);
 }
 
-/* TASK */
-.task{
-  display:flex;
-  justify-content:space-between;
-  padding:10px;
-  margin-bottom:8px;
-  background:#121a2c;
-  border-radius:10px;
+/* ================= GRID ================= */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
 }
 
-/* BUTTON */
+/* ================= BUTTONS (SMALL) ================= */
 button{
   width:100%;
-  padding:12px;
+  padding:8px;
   border:none;
-  border-radius:12px;
-  background:linear-gradient(45deg,gold,orange);
+  border-radius:10px;
+  background:gold;
   font-weight:bold;
+  font-size:13px;
 }
 
-/* NAV */
+/* ================= NAV BAR ================= */
 .nav{
   position:fixed;
   bottom:0;
   width:100%;
   display:flex;
-  background:#0b0f1c;
+
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+  border-top:1px solid rgba(255,255,255,0.1);
 }
 
 .nav div{
   flex:1;
   text-align:center;
   padding:12px;
-  cursor:pointer;
+  color:white;
+  font-size:14px;
 }
+
+.nav div:active{
+  color:gold;
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="space"></div>
+<!-- 🌑 OVERLAY -->
+<div id="overlay"></div>
 
-<div id="center"><div id="fx">⭐</div></div>
-
-<header>⭐ SPACE EARN STARS V3</header>
-
-<!-- HOME -->
-<div id="home" class="page active">
-  <div class="card">👤 الاسم: <span id="name"></span></div>
-  <div class="card">⭐ الرصيد: <span id="stars">0</span></div>
-  <div class="card">🔥 المستوى: <span id="level">1</span></div>
-
-  <button onclick="mine()">⛏ تعدين يومي</button>
-  <br><br>
-  <button onclick="adReward()">📺 مشاهدة إعلان</button>
-</div>
-
-<!-- TASKS -->
-<div id="tasks" class="page">
-  <div class="card">🎁 مهمات يومية</div>
-
-  <div class="task">
-    <span>📢 اشتراك قناة</span>
-    <button onclick="task(3)">+3</button>
-  </div>
-
-  <div class="task">
-    <span>👀 مشاهدة فيديو</span>
-    <button onclick="task(2)">+2</button>
-  </div>
-
-  <div class="task">
-    <span>🔗 فتح رابط</span>
-    <button onclick="task(1)">+1</button>
-  </div>
-</div>
-
-<!-- SHOP -->
-<div id="shop" class="page">
-  <div class="card">🛒 متجر</div>
-
-  <div class="task">
-    <span>💎 50 Stars</span>
-    <button onclick="buy(50)">شراء</button>
-  </div>
-
-  <div class="task">
-    <span>💎 100 Stars</span>
-    <button onclick="buy(100)">شراء</button>
-  </div>
-</div>
-
-<!-- WITHDRAW -->
-<div id="withdraw" class="page">
-  <div class="card">💳 سحب الأرباح</div>
-  <button onclick="withdraw()">طلب سحب</button>
-</div>
-
-<!-- NAV -->
-<div class="nav">
-  <div onclick="show('home')">🏠</div>
-  <div onclick="show('tasks')">🎁</div>
-  <div onclick="show('shop')">🛒</div>
-  <div onclick="show('withdraw')">💳</div>
-</div>
-
+<!-- ⭐ STARS GENERATOR -->
 <script>
-
-const tg = window.Telegram.WebApp;
-tg.expand();
-
-const user = tg.initDataUnsafe.user || {id:"0", first_name:"Guest"};
-let uid = user.id;
-
-/* LOCAL DATA (بدون backend حالياً) */
-let data = {
-  name:user.first_name,
-  stars:0,
-  level:1,
-  lastMine:0
-};
-
-/* SPACE STARS */
-function createStars(){
-  let s=document.getElementById("space");
-  for(let i=0;i<120;i++){
-    let d=document.createElement("div");
-    d.className="star";
-    d.style.left=Math.random()*100+"%";
-    d.style.top=Math.random()*100+"%";
-    d.style.animationDuration=(Math.random()*5+2)+"s";
-    s.appendChild(d);
-  }
+for(let i=0;i<100;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDuration=(Math.random()*10+3)+"s";
+  document.body.appendChild(s);
 }
-createStars();
-
-/* UI */
-function update(){
-  document.getElementById("name").innerText=data.name;
-  document.getElementById("stars").innerText=data.stars;
-  document.getElementById("level").innerText=Math.floor(data.stars/10)+1;
-
-  let fx=document.getElementById("fx");
-  let s=Math.floor(data.stars);
-
-  if(s<1) fx.innerHTML="⭐";
-  else if(s<5) fx.innerHTML="⭐ ⭐";
-  else if(s<10) fx.innerHTML="✨⭐✨";
-  else fx.innerHTML="🚀✨⭐🚀";
-}
-
-/* NAV */
-function show(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-/* MINE */
-function mine(){
-  let now=Date.now();
-  if(now-data.lastMine>86400000){
-    data.stars+=0.0005;
-    data.lastMine=now;
-  }
-  update();
-}
-
-/* ADS */
-function adReward(){
-  data.stars+=0.01;
-  update();
-}
-
-/* TASKS */
-function task(v){
-  data.stars+=v;
-  update();
-}
-
-/* SHOP */
-function buy(c){
-  if(data.stars>=c){
-    data.stars-=c;
-    alert("تم الشراء");
-  }else alert("رصيد ضعيف");
-  update();
-}
-
-/* WITHDRAW */
-function withdraw(){
-  if(data.stars>=10){
-    alert("تم إرسال طلب السحب (قيد المراجعة)");
-  }else{
-    alert("الحد الأدنى 10 Stars");
-  }
-}
-
-update();
-
 </script>
+
+<!-- ================= UI ================= -->
+<div class="page">
+
+  <div class="card">👤 الملف الشخصي</div>
+  <div class="card">⭐ النجوم: 0</div>
+
+  <div class="grid">
+
+    <div class="card">
+      🎮 ألعاب
+      <button>ابدأ</button>
+    </div>
+
+    <div class="card">
+      ⛏ تعدين
+      <button>تشغيل</button>
+    </div>
+
+    <div class="card">
+      🎁 مهمات
+      <button>عرض</button>
+    </div>
+
+    <div class="card">
+      📺 إعلان
+      <button>ربح</button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= NAV ================= -->
+<div class="nav">
+  <div>🏠</div>
+  <div>🎮</div>
+  <div>🎁</div>
+  <div>⛏</div>
+</div>
 
 </body>
   </html>
