@@ -39,7 +39,7 @@ body{
   z-index:-1;
 }
 
-/* ================= STARS ANIMATION ================= */
+/* ================= STARS ================= */
 .star{
   position:absolute;
   width:2px;
@@ -63,7 +63,6 @@ header{
   font-size:18px;
   background:rgba(0,0,0,0.4);
   backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 /* ================= PAGES ================= */
@@ -75,10 +74,6 @@ header{
   right:10px;
   overflow:auto;
   padding:10px;
-  border-radius:16px;
-
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(14px);
 }
 
 /* ================= CARDS ================= */
@@ -98,7 +93,7 @@ header{
   gap:12px;
 }
 
-/* ================= BUTTONS ================= */
+/* ================= BUTTON ================= */
 button{
   width:100%;
   padding:10px;
@@ -106,25 +101,15 @@ button{
   border:1px solid rgba(255,215,0,0.4);
   background:rgba(255,215,0,0.12);
   color:gold;
-  font-weight:bold;
-  font-size:13px;
-  transition:0.2s;
 }
 
-button:active{
-  transform:scale(0.95);
-  background:rgba(255,215,0,0.25);
-}
-
-/* ================= NAVIGATION ================= */
+/* ================= NAV ================= */
 .nav{
   position:fixed;
   bottom:0;
   width:100%;
   display:flex;
   background:rgba(0,0,0,0.75);
-  backdrop-filter:blur(10px);
-  border-top:1px solid rgba(255,255,255,0.1);
 }
 
 .nav div{
@@ -132,18 +117,34 @@ button:active{
   text-align:center;
   padding:12px;
   color:white;
-  font-size:14px;
-  font-weight:bold;
-  transition:0.2s;
 }
 
-.nav div:active{
-  color:gold;
+/* ================= MINES GAME ================= */
+.mine-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  margin-top:10px;
 }
 
-/* ================= SCROLL FIX ================= */
-::-webkit-scrollbar{
-  display:none;
+.mine{
+  aspect-ratio:1;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,215,0,0.2);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  color:white;
+}
+
+.mine.open{
+  background:rgba(0,255,0,0.2);
+}
+
+.mine.bomb{
+  background:rgba(255,0,0,0.3);
 }
 
 </style>
@@ -155,7 +156,7 @@ button:active{
 
 <header>⭐ Earn Stars PRO MAX</header>
 
-<!-- STAR ANIMATION -->
+<!-- STARS -->
 <script>
 for(let i=0;i<120;i++){
   let s=document.createElement("div");
@@ -166,114 +167,69 @@ for(let i=0;i<120;i++){
 }
 </script>
 
-<!-- ================= HOME ================= -->
+<!-- HOME -->
 <div class="page" id="home">
 
-  <div class="card">👤 الملف الشخصي</div>
-  <div class="card">⭐ النجوم: <span id="stars">0</span></div>
-  <div class="card">🔥 الحالة: مبتدئ</div>
+  <div class="card">⭐ الرصيد: <span id="stars">0</span></div>
 
   <div class="grid">
 
     <div class="card">
-      🎮 ألعاب
+      🎮 لعبة
       <button onclick="game()">ابدأ</button>
     </div>
 
     <div class="card">
       ⛏ تعدين
-      <button onclick="mine()">تشغيل</button>
+      <button onclick="mine()">+0.0005</button>
     </div>
 
   </div>
 
-</div>
-
-<!-- ================= TASKS ================= -->
-<div class="page" id="tasks" style="display:none;">
-
-  <div class="card">🎁 المهمات اليومية</div>
-
+  <!-- MINES GAME -->
   <div class="card">
-    📢 اشترك بالقناة
-    <button onclick="task(3)">+3 ⭐</button>
-  </div>
+    💣 Mines Game
 
-  <div class="card">
-    👀 شاهد فيديو
-    <button onclick="task(2)">+2 ⭐</button>
-  </div>
+    <p>الألغام:</p>
+    <input id="minesCount" type="number" value="3" min="1" max="11">
 
-  <div class="card">
-    🔗 افتح رابط
-    <button onclick="task(1)">+1 ⭐</button>
+    <p>الرهان:</p>
+    <input id="bet" type="number" value="1" min="1">
+
+    <button onclick="startGame()">ابدأ اللعبة</button>
+    <button onclick="cashOut()">💰 سحب</button>
+
+    <p>📈 المضاعف: <span id="multi">1</span>x</p>
+
+    <div id="mineGrid" class="mine-grid"></div>
   </div>
 
 </div>
 
-<!-- ================= ADS ================= -->
-<div class="page" id="ads" style="display:none;">
-
-  <div class="card">📺 إعلان يومي</div>
-
-  <div class="card">
-    شاهد إعلان كامل
-    <button onclick="ad()">تشغيل +0.01 ⭐</button>
-  </div>
-
-</div>
-
-<!-- ================= SHOP ================= -->
-<div class="page" id="shop" style="display:none;">
-
-  <div class="card">🛒 المتجر</div>
-
-  <div class="card">
-    50 ⭐
-    <button onclick="buy(50)">شراء</button>
-  </div>
-
-  <div class="card">
-    100 ⭐
-    <button onclick="buy(100)">شراء</button>
-  </div>
-
-</div>
-
-<!-- ================= NAV ================= -->
+<!-- NAV -->
 <div class="nav">
-
   <div onclick="show('home')">🏠</div>
-  <div onclick="show('tasks')">🎁</div>
-  <div onclick="show('ads')">📺</div>
-  <div onclick="show('shop')">🛒</div>
-
 </div>
 
 <script>
 
 let stars = 0;
 
-/* UPDATE */
+/* MINES */
+let mines=[];
+let opened=[];
+let gameOn=false;
+let multiplier=1;
+let bet=1;
+
 function update(){
   document.getElementById("stars").innerText = stars.toFixed(4);
+  document.getElementById("multi").innerText = multiplier.toFixed(2);
 }
 
-/* NAV */
-function show(id){
-  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
-  document.getElementById(id).style.display='block';
-}
-
-/* GAME */
+/* GAME SIMPLE */
 function game(){
-  if(Math.random()>0.5){
-    stars += 1;
-    alert("🎉 فزت");
-  }else{
-    stars -= 0.5;
-    alert("😢 خسرت");
-  }
+  stars += (Math.random()>0.5)?1:-0.5;
   update();
 }
 
@@ -283,26 +239,81 @@ function mine(){
   update();
 }
 
-/* TASK */
-function task(v){
-  stars += v;
-  update();
-}
+/* START MINES */
+function startGame(){
 
-/* ADS */
-function ad(){
-  stars += 0.01;
-  update();
-}
+  let count = parseInt(document.getElementById("minesCount").value);
+  bet = parseFloat(document.getElementById("bet").value);
 
-/* BUY */
-function buy(v){
-  if(stars>=v){
-    stars -= v;
-    alert("تم الشراء");
-  }else{
-    alert("رصيد غير كافي");
+  if(stars < bet){
+    alert("رصيدك لا يكفي");
+    return;
   }
+
+  stars -= bet;
+
+  mines=[];
+  opened=[];
+  multiplier=1;
+  gameOn=true;
+
+  let grid=document.getElementById("mineGrid");
+  grid.innerHTML="";
+
+  for(let i=0;i<12;i++){
+    let box=document.createElement("div");
+    box.className="mine";
+
+    box.onclick=()=>openBox(i,box);
+
+    grid.appendChild(box);
+  }
+
+  while(mines.length<count){
+    let r=Math.floor(Math.random()*12);
+    if(!mines.includes(r)) mines.push(r);
+  }
+
+  update();
+}
+
+/* OPEN BOX */
+function openBox(i,box){
+
+  if(!gameOn || opened.includes(i)) return;
+
+  if(mines.includes(i)){
+    box.classList.add("bomb");
+    box.innerHTML="💣";
+    gameOn=false;
+    multiplier=0;
+    alert("💥 خسرت");
+  }else{
+    box.classList.add("open");
+    box.innerHTML="⭐";
+    opened.push(i);
+    multiplier += 0.4;
+  }
+
+  update();
+}
+
+/* CASHOUT */
+function cashOut(){
+
+  if(!gameOn) return alert("ابدأ لعبة");
+
+  if(opened.length < 3){
+    return alert("لازم 3 فتحات على الأقل");
+  }
+
+  let win = bet * multiplier;
+  stars += win;
+
+  gameOn=false;
+
+  alert("💰 ربحت: " + win.toFixed(3));
+
   update();
 }
 
