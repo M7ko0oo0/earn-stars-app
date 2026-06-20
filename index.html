@@ -3,38 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>⭐ Earn Stars ULTRA SPACE</title>
+<title>⭐ Earn Stars PRO MAX</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
 
-/* ================= BODY ================= */
-html,body{
+/* ================= RESET ================= */
+*{
   margin:0;
-  height:100%;
-  overflow:hidden;
+  padding:0;
+  box-sizing:border-box;
   font-family:sans-serif;
 }
 
-/* 🌌 REAL SPACE IMAGE */
+html,body{
+  height:100%;
+  overflow:hidden;
+}
+
+/* ================= SPACE BACKGROUND ================= */
 body{
-  background:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564') no-repeat center center fixed;
+  background:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa') no-repeat center center fixed;
   background-size:cover;
 }
 
-/* 🌑 DARK OVERLAY */
-#overlay{
+/* ================= DARK OVERLAY ================= */
+.overlay{
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.72);
   z-index:-1;
 }
 
-/* ⭐ STARS */
+/* ================= STARS ANIMATION ================= */
 .star{
   position:absolute;
   width:2px;
@@ -50,56 +55,74 @@ body{
   to{transform:translateY(110vh);}
 }
 
-/* ================= MAIN PANEL ================= */
+/* ================= HEADER ================= */
+header{
+  text-align:center;
+  padding:14px;
+  color:gold;
+  font-size:18px;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+/* ================= PAGES ================= */
 .page{
   position:fixed;
+  top:60px;
   bottom:70px;
   left:10px;
   right:10px;
-  padding:12px;
-  border-radius:18px;
+  overflow:auto;
+  padding:10px;
+  border-radius:16px;
 
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(12px);
-
-  border:1px solid rgba(255,255,255,0.15);
-  color:white;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(14px);
 }
 
 /* ================= CARDS ================= */
 .card{
+  background:rgba(0,0,0,0.45);
   padding:12px;
   margin-bottom:10px;
   border-radius:12px;
-  background:rgba(0,0,0,0.4);
+  border:1px solid rgba(255,255,255,0.1);
+  color:white;
 }
 
 /* ================= GRID ================= */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:15px;
+  gap:12px;
 }
 
-/* ================= BUTTONS (SMALL) ================= */
+/* ================= BUTTONS ================= */
 button{
   width:100%;
-  padding:8px;
-  border:none;
-  border-radius:10px;
-  background:gold;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid rgba(255,215,0,0.4);
+  background:rgba(255,215,0,0.12);
+  color:gold;
   font-weight:bold;
   font-size:13px;
+  transition:0.2s;
 }
 
-/* ================= NAV BAR ================= */
+button:active{
+  transform:scale(0.95);
+  background:rgba(255,215,0,0.25);
+}
+
+/* ================= NAVIGATION ================= */
 .nav{
   position:fixed;
   bottom:0;
   width:100%;
   display:flex;
-
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.75);
   backdrop-filter:blur(10px);
   border-top:1px solid rgba(255,255,255,0.1);
 }
@@ -110,10 +133,17 @@ button{
   padding:12px;
   color:white;
   font-size:14px;
+  font-weight:bold;
+  transition:0.2s;
 }
 
 .nav div:active{
   color:gold;
+}
+
+/* ================= SCROLL FIX ================= */
+::-webkit-scrollbar{
+  display:none;
 }
 
 </style>
@@ -121,12 +151,13 @@ button{
 
 <body>
 
-<!-- 🌑 OVERLAY -->
-<div id="overlay"></div>
+<div class="overlay"></div>
 
-<!-- ⭐ STARS GENERATOR -->
+<header>⭐ Earn Stars PRO MAX</header>
+
+<!-- STAR ANIMATION -->
 <script>
-for(let i=0;i<100;i++){
+for(let i=0;i<120;i++){
   let s=document.createElement("div");
   s.className="star";
   s.style.left=Math.random()*100+"%";
@@ -135,45 +166,149 @@ for(let i=0;i<100;i++){
 }
 </script>
 
-<!-- ================= UI ================= -->
-<div class="page">
+<!-- ================= HOME ================= -->
+<div class="page" id="home">
 
   <div class="card">👤 الملف الشخصي</div>
-  <div class="card">⭐ النجوم: 0</div>
+  <div class="card">⭐ النجوم: <span id="stars">0</span></div>
+  <div class="card">🔥 الحالة: مبتدئ</div>
 
   <div class="grid">
 
     <div class="card">
       🎮 ألعاب
-      <button>ابدأ</button>
+      <button onclick="game()">ابدأ</button>
     </div>
 
     <div class="card">
       ⛏ تعدين
-      <button>تشغيل</button>
-    </div>
-
-    <div class="card">
-      🎁 مهمات
-      <button>عرض</button>
-    </div>
-
-    <div class="card">
-      📺 إعلان
-      <button>ربح</button>
+      <button onclick="mine()">تشغيل</button>
     </div>
 
   </div>
 
 </div>
 
-<!-- ================= NAV ================= -->
-<div class="nav">
-  <div>🏠</div>
-  <div>🎮</div>
-  <div>🎁</div>
-  <div>⛏</div>
+<!-- ================= TASKS ================= -->
+<div class="page" id="tasks" style="display:none;">
+
+  <div class="card">🎁 المهمات اليومية</div>
+
+  <div class="card">
+    📢 اشترك بالقناة
+    <button onclick="task(3)">+3 ⭐</button>
+  </div>
+
+  <div class="card">
+    👀 شاهد فيديو
+    <button onclick="task(2)">+2 ⭐</button>
+  </div>
+
+  <div class="card">
+    🔗 افتح رابط
+    <button onclick="task(1)">+1 ⭐</button>
+  </div>
+
 </div>
 
+<!-- ================= ADS ================= -->
+<div class="page" id="ads" style="display:none;">
+
+  <div class="card">📺 إعلان يومي</div>
+
+  <div class="card">
+    شاهد إعلان كامل
+    <button onclick="ad()">تشغيل +0.01 ⭐</button>
+  </div>
+
+</div>
+
+<!-- ================= SHOP ================= -->
+<div class="page" id="shop" style="display:none;">
+
+  <div class="card">🛒 المتجر</div>
+
+  <div class="card">
+    50 ⭐
+    <button onclick="buy(50)">شراء</button>
+  </div>
+
+  <div class="card">
+    100 ⭐
+    <button onclick="buy(100)">شراء</button>
+  </div>
+
+</div>
+
+<!-- ================= NAV ================= -->
+<div class="nav">
+
+  <div onclick="show('home')">🏠</div>
+  <div onclick="show('tasks')">🎁</div>
+  <div onclick="show('ads')">📺</div>
+  <div onclick="show('shop')">🛒</div>
+
+</div>
+
+<script>
+
+let stars = 0;
+
+/* UPDATE */
+function update(){
+  document.getElementById("stars").innerText = stars.toFixed(4);
+}
+
+/* NAV */
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+  document.getElementById(id).style.display='block';
+}
+
+/* GAME */
+function game(){
+  if(Math.random()>0.5){
+    stars += 1;
+    alert("🎉 فزت");
+  }else{
+    stars -= 0.5;
+    alert("😢 خسرت");
+  }
+  update();
+}
+
+/* MINE */
+function mine(){
+  stars += 0.0005;
+  update();
+}
+
+/* TASK */
+function task(v){
+  stars += v;
+  update();
+}
+
+/* ADS */
+function ad(){
+  stars += 0.01;
+  update();
+}
+
+/* BUY */
+function buy(v){
+  if(stars>=v){
+    stars -= v;
+    alert("تم الشراء");
+  }else{
+    alert("رصيد غير كافي");
+  }
+  update();
+}
+
+update();
+
+</script>
+
 </body>
-  </html>
+</html>
