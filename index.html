@@ -14,9 +14,42 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#080808;
+background:
+radial-gradient(circle at top,#2a0000 0%,#0a0000 30%,#050505 100%);
 color:white;
-padding-bottom:90px;
+padding-bottom:100px;
+min-height:100vh;
+overflow-x:hidden;
+position:relative;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 20%,rgba(255,0,0,.15),transparent 25%),
+radial-gradient(circle at 80% 60%,rgba(255,0,0,.12),transparent 20%),
+radial-gradient(circle at 50% 90%,rgba(255,0,0,.18),transparent 30%);
+pointer-events:none;
+}
+
+body::after{
+content:"";
+position:fixed;
+bottom:-180px;
+left:50%;
+transform:translateX(-50%);
+width:450px;
+height:450px;
+border-radius:50%;
+background:
+radial-gradient(circle,#ff1a1a 0%,#600000 50%,transparent 75%);
+box-shadow:
+0 0 120px rgba(255,0,0,.6),
+0 0 250px rgba(255,0,0,.3);
+pointer-events:none;
+}
 }
 
 .header{
