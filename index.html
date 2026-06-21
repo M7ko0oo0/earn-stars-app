@@ -3,341 +3,316 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Earn Stars</title>
+<title>Stars App</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Tahoma,sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
-background:#050505;
+background:#080808;
 color:white;
-padding:15px;
-background-image:
-radial-gradient(circle at center,#300 0%,#050505 60%);
+padding-bottom:90px;
 }
 
-.top-box{
-background:linear-gradient(180deg,#250000,#120000);
-border:1px solid #ff2a2a;
+.header{
 padding:15px;
-border-radius:18px;
-margin-bottom:15px;
-box-shadow:0 0 15px #ff000033;
-}
-
-.pool{
-font-size:22px;
-font-weight:bold;
-color:#ffd700;
-}
-
-.join{
-margin-top:10px;
-background:linear-gradient(180deg,#ff2a2a,#b30000);
-padding:15px;
-border-radius:12px;
+background:#111;
+border-bottom:1px solid #222;
 text-align:center;
-cursor:pointer;
+font-size:20px;
+font-weight:bold;
+}
+
+.page{
+display:none;
+padding:15px;
+}
+
+.page.active{
+display:block;
 }
 
 .profile{
-background:linear-gradient(180deg,#220000,#0d0d0d);
-border:1px solid #ff3333;
+background:linear-gradient(180deg,#250000,#0f0f0f);
+border:1px solid #ff2b2b;
 border-radius:20px;
 padding:20px;
-margin-bottom:20px;
+text-align:center;
+margin-top:10px;
 }
 
 .avatar{
 width:80px;
 height:80px;
 border-radius:50%;
-border:3px solid #ff3333;
+background:#333;
 margin:auto;
-background:url('https://i.imgur.com/V6bM5KX.png');
-background-size:cover;
+border:3px solid red;
 }
 
-.username{
-font-size:24px;
+.name{
+font-size:22px;
 margin-top:10px;
 }
 
 .balance{
 font-size:40px;
-color:#ffd700;
-font-weight:bold;
-margin:15px 0;
+color:gold;
+margin-top:10px;
 }
 
-.stats{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
-.stat{
-flex:1;
-background:#170000;
-padding:12px;
-border-radius:12px;
-border:1px solid #ff2222;
-}
-
-.grid{
+.cards{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:12px;
-}
-
-.box{
-background:linear-gradient(180deg,#250000,#100000);
-border:1px solid #ff3333;
-border-radius:18px;
-padding:25px 10px;
-transition:.3s;
-}
-
-.box:hover{
-transform:translateY(-3px);
-}
-
-.icon{
-font-size:35px;
-margin-bottom:10px;
-}
-
-.box-title{
-font-size:20px;
-}
-
-.box-sub{
-font-size:12px;
-opacity:.8;
-margin-top:5px;
-}
-
-.withdraw{
-margin-top:20px;
-background:linear-gradient(180deg,#250000,#100000);
-border:1px solid #ff3333;
-border-radius:20px;
-padding:20px;
-}
-
-.withdraw button{
-width:100%;
-padding:15px;
 margin-top:15px;
-border:none;
-border-radius:12px;
-background:linear-gradient(180deg,#ff2a2a,#b10000);
-color:white;
-font-size:18px;
+}
+
+.card{
+background:#151515;
+border:1px solid #ff2b2b;
+border-radius:15px;
+padding:20px;
+text-align:center;
 cursor:pointer;
 }
 
-.leaderboard{
-margin-top:20px;
-background:#110000;
-border:1px solid #ff3333;
-border-radius:18px;
-padding:15px;
+.card span{
+font-size:30px;
+display:block;
+margin-bottom:10px;
 }
 
-.player{
+.list{
+margin-top:15px;
+}
+
+.item{
+background:#151515;
+border:1px solid #333;
+padding:15px;
+margin-bottom:10px;
+border-radius:12px;
 display:flex;
 justify-content:space-between;
-padding:12px;
-border-bottom:1px solid #331111;
 }
 
-.player:last-child{
+.withdraw-box{
+background:#151515;
+border-radius:15px;
+padding:15px;
+margin-top:15px;
+}
+
+input{
+width:100%;
+padding:12px;
 border:none;
+border-radius:10px;
+margin-top:10px;
+background:#222;
+color:white;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:red;
+color:white;
+font-size:16px;
 }
 
 .bottom-nav{
 position:fixed;
 bottom:0;
-right:0;
 left:0;
+right:0;
 height:70px;
-background:#090909;
+background:#111;
 display:flex;
 justify-content:space-around;
 align-items:center;
-border-top:1px solid #ff2222;
+border-top:1px solid #333;
 }
 
 .nav-btn{
 text-align:center;
-color:white;
+cursor:pointer;
 font-size:14px;
 }
 
-.center-btn{
-width:60px;
-height:60px;
-border-radius:50%;
-background:linear-gradient(180deg,#ff2a2a,#b10000);
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:28px;
-box-shadow:0 0 20px red;
-margin-top:-30px;
+.active-nav{
+color:red;
 }
-
 </style>
 </head>
-
 <body>
 
-<div class="top-box">
-<div class="pool">⭐ Prize Pool: 100,000 Stars</div>
-<div class="join">🎁 Join Giveaway</div>
+<div class="header">
+⭐ Stars App
 </div>
+
+<!-- الصفحة الرئيسية -->
+
+<div id="home" class="page active">
 
 <div class="profile">
-
 <div class="avatar"></div>
-
-<div class="username">Ali ⭐</div>
-
-<div class="balance" id="stars">1.45 ⭐</div>
-
-<div class="stats">
-
-<div class="stat">
-<div>Earned</div>
-<div>125.80</div>
+<div class="name">User</div>
+<div class="balance">125 ⭐</div>
 </div>
 
-<div class="stat">
-<div>Referrals</div>
-<div>12</div>
+<div class="cards">
+
+<div class="card">
+<span>🎮</span>
+الألعاب
 </div>
 
-<div class="stat">
-<div>Rank</div>
-<div>#1058</div>
+<div class="card">
+<span>🎁</span>
+المهام
 </div>
 
+<div class="card">
+<span>⛏️</span>
+التعدين
 </div>
 
-</div>
-
-<div class="grid">
-
-<div class="box">
-<div class="icon">🎮</div>
-<div class="box-title">الألعاب</div>
-<div class="box-sub">العب واربح النجوم</div>
-</div>
-
-<div class="box">
-<div class="icon">🎁</div>
-<div class="box-title">المهام</div>
-<div class="box-sub">اكمل المهام واربح</div>
-</div>
-
-<div class="box">
-<div class="icon">📺</div>
-<div class="box-title">الإعلانات</div>
-<div class="box-sub">شاهد واربح</div>
-</div>
-
-<div class="box">
-<div class="icon">⛏️</div>
-<div class="box-title">التعدين</div>
-<div class="box-sub">جمع النجوم</div>
-</div>
-
-<div class="box">
-<div class="icon">🏆</div>
-<div class="box-title">المتصدرون</div>
-<div class="box-sub">أفضل اللاعبين</div>
-</div>
-
-<div class="box">
-<div class="icon">💣</div>
-<div class="box-title">لعبة الألغام</div>
-<div class="box-sub">اربح الكثير</div>
+<div class="card">
+<span>👥</span>
+الإحالات
 </div>
 
 </div>
 
-<div class="withdraw">
-
-<h3>السحب إلى Telegram</h3>
-
-<input
-style="width:100%;padding:15px;border-radius:12px;background:#111;border:1px solid #ff3333;color:white;margin-top:15px;"
-type="number"
-placeholder="عدد النجوم">
-
-<button>🚀 سحب إلى Telegram</button>
-
 </div>
 
-<div class="leaderboard">
+<!-- الألعاب -->
 
-<h3 style="margin-bottom:15px;">🏆 المتصدرون</h3>
+<div id="games" class="page">
 
-<div class="player">
-<span>Mohammed ⭐</span>
-<span>125,450</span>
+<h2>🎮 الألعاب</h2>
+
+<div class="list">
+
+<div class="item">
+<span>💣 لعبة الألغام</span>
+<span>▶</span>
 </div>
 
-<div class="player">
-<span>Karar ⭐</span>
-<span>98,450</span>
+<div class="item">
+<span>🎲 الحظ</span>
+<span>▶</span>
 </div>
 
-<div class="player">
-<span>Zainab ⭐</span>
-<span>85,231</span>
-</div>
-
-<div class="player">
-<span>Ali ⭐</span>
-<span>65,432</span>
+<div class="item">
+<span>🎯 العجلة</span>
+<span>▶</span>
 </div>
 
 </div>
 
-<div style="height:100px"></div>
+</div>
+
+<!-- المتصدرين -->
+
+<div id="leaders" class="page">
+
+<h2>🏆 المتصدرين</h2>
+
+<div class="list">
+
+<div class="item">
+<span>#1 Ali</span>
+<span>2500⭐</span>
+</div>
+
+<div class="item">
+<span>#2 Ahmed</span>
+<span>2100⭐</span>
+</div>
+
+<div class="item">
+<span>#3 Mohammed</span>
+<span>1900⭐</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- السحب -->
+
+<div id="withdraw" class="page">
+
+<h2>💸 سحب النجوم</h2>
+
+<div class="withdraw-box">
+
+<input type="number" placeholder="عدد النجوم">
+
+<button>سحب إلى Telegram</button>
+
+</div>
+
+</div>
+
+<!-- القائمة السفلية -->
 
 <div class="bottom-nav">
 
-<div class="nav-btn">
-👤<br>الملف
+<div class="nav-btn active-nav"
+onclick="showPage('home',this)">
+🏠<br>الرئيسية
 </div>
 
-<div class="nav-btn">
-🏆<br>المتصدرون
-</div>
-
-<div class="center-btn">
-⭐
-</div>
-
-<div class="nav-btn">
+<div class="nav-btn"
+onclick="showPage('games',this)">
 🎮<br>الألعاب
 </div>
 
-<div class="nav-btn">
-💼<br>السحب
+<div class="nav-btn"
+onclick="showPage('leaders',this)">
+🏆<br>المتصدرين
+</div>
+
+<div class="nav-btn"
+onclick="showPage('withdraw',this)">
+💸<br>السحب
 </div>
 
 </div>
+
+<script>
+
+function showPage(page,btn){
+
+document
+.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+document
+.getElementById(page)
+.classList.add("active");
+
+document
+.querySelectorAll(".nav-btn")
+.forEach(b=>b.classList.remove("active-nav"));
+
+btn.classList.add("active-nav");
+
+}
+
+</script>
 
 </body>
 </html>
