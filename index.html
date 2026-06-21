@@ -1,150 +1,254 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>⭐ Earn Stars PRO MAX</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Earn Stars</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
 
-/* ================= RESET ================= */
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
 }
 
 html,body{
-  height:100%;
-  overflow:hidden;
+height:100%;
+overflow:hidden;
+background:#050505;
+color:white;
 }
 
-/* ================= SPACE BACKGROUND ================= */
-body{
-  background:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa') no-repeat center center fixed;
-  background-size:cover;
+/* خلفية الفضاء */
+
+.space{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
+
+background:url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1200")
+center center;
+background-size:cover;
 }
 
-/* ================= DARK OVERLAY ================= */
-.overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.72);
-  z-index:-1;
-}
+/* النجوم */
 
-/* ================= STARS ================= */
 .star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  border-radius:50%;
-  opacity:0.7;
-  animation:fall linear infinite;
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+opacity:.8;
+animation:fall linear infinite;
 }
 
 @keyframes fall{
-  from{transform:translateY(-10vh);}
-  to{transform:translateY(110vh);}
+
+0%{
+transform:translateY(-100px);
 }
 
-/* ================= HEADER ================= */
-header{
-  text-align:center;
-  padding:14px;
-  color:gold;
-  font-size:18px;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(10px);
+100%{
+transform:translateY(120vh);
 }
 
-/* ================= PAGES ================= */
+}
+
+/* الهيدر */
+
+.header{
+
+height:65px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:22px;
+font-weight:bold;
+
+color:#ffd700;
+
+border-bottom:1px solid rgba(255,0,0,.3);
+
+background:rgba(0,0,0,.65);
+
+backdrop-filter:blur(10px);
+
+}
+
+/* الصفحة */
+
 .page{
-  position:fixed;
-  top:60px;
-  bottom:70px;
-  left:10px;
-  right:10px;
-  overflow:auto;
-  padding:10px;
+
+position:fixed;
+
+top:65px;
+bottom:80px;
+
+left:0;
+right:0;
+
+overflow:auto;
+
+padding:15px;
+
 }
 
-/* ================= CARDS ================= */
+.page::-webkit-scrollbar{
+display:none;
+}
+
+/* بطاقة */
+
 .card{
-  background:rgba(0,0,0,0.45);
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.1);
-  color:white;
+
+background:rgba(10,10,10,.92);
+
+border:1px solid rgba(255,0,0,.25);
+
+border-radius:18px;
+
+padding:15px;
+
+margin-bottom:12px;
+
+box-shadow:
+0 0 15px rgba(255,0,0,.10);
+
 }
 
-/* ================= GRID ================= */
+/* الرصيد */
+
+.balance{
+
+text-align:center;
+
+padding:25px;
+
+}
+
+.balance h1{
+
+color:#ffd700;
+
+font-size:38px;
+
+margin-top:10px;
+
+}
+
+.balance p{
+
+color:#aaa;
+
+margin-top:5px;
+
+}
+
+/* شبكة */
+
 .grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
 }
 
-/* ================= BUTTON ================= */
-button{
-  width:100%;
-  padding:10px;
-  border-radius:12px;
-  border:1px solid rgba(255,215,0,0.4);
-  background:rgba(255,215,0,0.12);
-  color:gold;
+/* ازرار الصفحة */
+
+.box{
+
+background:#111;
+
+border:1px solid rgba(255,0,0,.3);
+
+border-radius:16px;
+
+padding:18px;
+
+text-align:center;
+
+font-size:16px;
+
+font-weight:bold;
+
+transition:.2s;
+
 }
 
-/* ================= NAV ================= */
+.box:active{
+
+transform:scale(.96);
+
+border-color:red;
+
+}
+
+/* السفلي */
+
 .nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  display:flex;
-  background:rgba(0,0,0,0.75);
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+right:0;
+
+height:80px;
+
+background:#090909;
+
+border-top:1px solid rgba(255,0,0,.3);
+
+display:flex;
+
 }
 
-.nav div{
-  flex:1;
-  text-align:center;
-  padding:12px;
-  color:white;
+.navBtn{
+
+flex:1;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:13px;
+
+font-weight:bold;
+
 }
 
-/* ================= MINES GAME ================= */
-.mine-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:6px;
-  margin-top:10px;
+.active{
+
+color:#ff2d2d;
+
 }
 
-.mine{
-  aspect-ratio:1;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,215,0,0.2);
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  color:white;
-}
+.gold{
 
-.mine.open{
-  background:rgba(0,255,0,0.2);
-}
+color:#ffd700;
 
-.mine.bomb{
-  background:rgba(255,0,0,0.3);
 }
 
 </style>
@@ -152,174 +256,127 @@ button{
 
 <body>
 
-<div class="overlay"></div>
+<div class="space"></div>
 
-<header>⭐ Earn Stars PRO MAX</header>
+<div class="header">
+⭐ Earn Stars
+</div>
 
-<!-- STARS -->
-<script>
-for(let i=0;i<120;i++){
-  let s=document.createElement("div");
-  s.className="star";
-  s.style.left=Math.random()*100+"%";
-  s.style.animationDuration=(Math.random()*10+3)+"s";
-  document.body.appendChild(s);
-}
-</script>
+<div class="page">
 
-<!-- HOME -->
-<div class="page" id="home">
+<div class="card balance">
 
-  <div class="card">⭐ الرصيد: <span id="stars">0</span></div>
+<div>رصيدك الحالي</div>
 
-  <div class="grid">
+<h1 id="stars">
+0.0000
+</h1>
 
-    <div class="card">
-      🎮 لعبة
-      <button onclick="game()">ابدأ</button>
-    </div>
-
-    <div class="card">
-      ⛏ تعدين
-      <button onclick="mine()">+0.0005</button>
-    </div>
-
-  </div>
-
-  <!-- MINES GAME -->
-  <div class="card">
-    💣 Mines Game
-
-    <p>الألغام:</p>
-    <input id="minesCount" type="number" value="3" min="1" max="11">
-
-    <p>الرهان:</p>
-    <input id="bet" type="number" value="1" min="1">
-
-    <button onclick="startGame()">ابدأ اللعبة</button>
-    <button onclick="cashOut()">💰 سحب</button>
-
-    <p>📈 المضاعف: <span id="multi">1</span>x</p>
-
-    <div id="mineGrid" class="mine-grid"></div>
-  </div>
+<p>
+Telegram Stars
+</p>
 
 </div>
 
-<!-- NAV -->
+<div class="grid">
+
+<div class="box">
+🎁
+<br><br>
+المهمات
+</div>
+
+<div class="box">
+📺
+<br><br>
+الإعلانات
+</div>
+
+<div class="box">
+🎮
+<br><br>
+الألعاب
+</div>
+
+<div class="box">
+🏆
+<br><br>
+المتصدرون
+</div>
+
+</div>
+
+</div>
+
 <div class="nav">
-  <div onclick="show('home')">🏠</div>
+
+<div class="navBtn active">
+🏠
+الرئيسية
+</div>
+
+<div class="navBtn">
+⭐
+اربح
+</div>
+
+<div class="navBtn">
+🎮
+الألعاب
+</div>
+
+<div class="navBtn">
+👤
+الملف
+</div>
+
 </div>
 
 <script>
 
-let stars = 0;
+for(let i=0;i<100;i++){
 
-/* MINES */
-let mines=[];
-let opened=[];
-let gameOn=false;
-let multiplier=1;
-let bet=1;
+let star=document.createElement("div");
 
-function update(){
-  document.getElementById("stars").innerText = stars.toFixed(4);
-  document.getElementById("multi").innerText = multiplier.toFixed(2);
+star.className="star";
+
+star.style.left=Math.random()*100+"%";
+
+star.style.animationDuration=
+(Math.random()*10+5)+"s";
+
+document.body.appendChild(star);
+
 }
-
-/* GAME SIMPLE */
-function game(){
-  stars += (Math.random()>0.5)?1:-0.5;
-  update();
-}
-
-/* MINE */
-function mine(){
-  stars += 0.0005;
-  update();
-}
-
-/* START MINES */
-function startGame(){
-
-  let count = parseInt(document.getElementById("minesCount").value);
-  bet = parseFloat(document.getElementById("bet").value);
-
-  if(stars < bet){
-    alert("رصيدك لا يكفي");
-    return;
-  }
-
-  stars -= bet;
-
-  mines=[];
-  opened=[];
-  multiplier=1;
-  gameOn=true;
-
-  let grid=document.getElementById("mineGrid");
-  grid.innerHTML="";
-
-  for(let i=0;i<12;i++){
-    let box=document.createElement("div");
-    box.className="mine";
-
-    box.onclick=()=>openBox(i,box);
-
-    grid.appendChild(box);
-  }
-
-  while(mines.length<count){
-    let r=Math.floor(Math.random()*12);
-    if(!mines.includes(r)) mines.push(r);
-  }
-
-  update();
-}
-
-/* OPEN BOX */
-function openBox(i,box){
-
-  if(!gameOn || opened.includes(i)) return;
-
-  if(mines.includes(i)){
-    box.classList.add("bomb");
-    box.innerHTML="💣";
-    gameOn=false;
-    multiplier=0;
-    alert("💥 خسرت");
-  }else{
-    box.classList.add("open");
-    box.innerHTML="⭐";
-    opened.push(i);
-    multiplier += 0.4;
-  }
-
-  update();
-}
-
-/* CASHOUT */
-function cashOut(){
-
-  if(!gameOn) return alert("ابدأ لعبة");
-
-  if(opened.length < 3){
-    return alert("لازم 3 فتحات على الأقل");
-  }
-
-  let win = bet * multiplier;
-  stars += win;
-
-  gameOn=false;
-
-  alert("💰 ربحت: " + win.toFixed(3));
-
-  update();
-}
-
-update();
 
 </script>
+<div id="profilePage" style="display:none;">
 
+<div class="card">
+<h2>👤 الملف الشخصي</h2>
+</div>
+
+<div class="card">
+الاسم:
+<span id="userName">Guest</span>
+</div>
+
+<div class="card">
+المعرف:
+<span id="userId">0</span>
+</div>
+
+<div class="card">
+⭐ النجوم:
+<span id="userStars">0</span>
+</div>
+
+<div class="card">
+👥 الإحالات:
+<span>0</span>
+</div>
+
+</div> 
+  
 </body>
 </html>
