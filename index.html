@@ -107,12 +107,26 @@ margin-top:15px;
 }
 
 .card{
-background:#151515;
-border:1px solid #ff2b2b;
-border-radius:15px;
-padding:20px;
+background:linear-gradient(180deg,#2b0000,#130000);
+border:1px solid rgba(255,60,60,.5);
+border-radius:24px;
+padding:24px;
 text-align:center;
 cursor:pointer;
+box-shadow:
+0 0 20px rgba(255,0,0,.25),
+inset 0 0 20px rgba(255,0,0,.08);
+transition:.2s;
+}
+
+.card:active{
+transform:scale(.97);
+}
+
+.card span{
+font-size:38px;
+display:block;
+margin-bottom:12px;
 }
 
 .card span{
