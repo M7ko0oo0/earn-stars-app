@@ -392,7 +392,29 @@ box-shadow:
 0 0 30px rgba(255,0,0,.8);
 border:2px solid rgba(255,255,255,.15);
 }
-  
+
+  </script>
+
+<script type="module">
+
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAv4XK0oKc1srvfpMmzWQAeYQikgOWGAzc",
+  authDomain: "test-for-mobeas-1beaa.firebaseapp.com",
+  projectId: "test-for-mobeas-1beaa",
+  storageBucket: "test-for-mobeas-1beaa.firebasestorage.app",
+  messagingSenderId: "274160242858",
+  appId: "1:274160242858:web:a45b083944f4bd7b65c0d3"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+console.log("Firebase connected");
+
 </script>
 
 </body>
