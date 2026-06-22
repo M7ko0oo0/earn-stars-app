@@ -1,421 +1,557 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stars App</title>
+<!-- MAIN APP -->
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+<div class="top-bar">
 
-body{
-background:
-radial-gradient(circle at top,#2a0000 0%,#0a0000 30%,#050505 100%);
-color:white;
-padding-bottom:100px;
-min-height:100vh;
-overflow-x:hidden;
-position:relative;
-}
+    <div class="logo">
+        ⭐ Earn Stars
+    </div>
 
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at 20% 20%,rgba(255,0,0,.15),transparent 25%),
-radial-gradient(circle at 80% 60%,rgba(255,0,0,.12),transparent 20%),
-radial-gradient(circle at 50% 90%,rgba(255,0,0,.18),transparent 30%);
-pointer-events:none;
-}
-
-body::after{
-content:"";
-position:fixed;
-bottom:-180px;
-left:50%;
-transform:translateX(-50%);
-width:450px;
-height:450px;
-border-radius:50%;
-background:
-radial-gradient(circle,#ff1a1a 0%,#600000 50%,transparent 75%);
-box-shadow:
-0 0 120px rgba(255,0,0,.6),
-0 0 250px rgba(255,0,0,.3);
-pointer-events:none;
-}
-}
-
-.header{
-padding:15px;
-background:#111;
-border-bottom:1px solid #222;
-text-align:center;
-font-size:20px;
-font-weight:bold;
-}
-
-.page{
-display:none;
-padding:15px;
-}
-
-.page.active{
-display:block;
-}
-
-.profile{
-background:linear-gradient(180deg,#350000,#120000);
-border:1px solid rgba(255,50,50,.6);
-border-radius:30px;
-padding:25px;
-text-align:center;
-margin-top:15px;
-box-shadow:
-0 0 25px rgba(255,0,0,.25),
-inset 0 0 25px rgba(255,0,0,.08);
-}
-
-  
-.avatar{
-width:100px;
-height:100px;
-border-radius:50%;
-background:#222;
-margin:auto;
-border:4px solid #ff2b2b;
-box-shadow:
-0 0 25px rgba(255,0,0,.6);
-}
-
-.name{
-font-size:24px;
-font-weight:bold;
-margin-top:12px;
-}
-
-.balance{
-font-size:46px;
-font-weight:bold;
-color:#ffd700;
-margin-top:12px;
-text-shadow:0 0 15px rgba(255,215,0,.5);
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:16px;
-margin-top:15px;
-}
-
-.card{
-background:linear-gradient(180deg,#2b0000,#130000);
-border:1px solid rgba(255,60,60,.5);
-border-radius:24px;
-padding:24px;
-text-align:center;
-cursor:pointer;
-box-shadow:
-0 0 20px rgba(255,0,0,.25),
-inset 0 0 20px rgba(255,0,0,.08);
-transition:.2s;
-}
-
-.card:active{
-transform:scale(.97);
-}
-
-.card span{
-font-size:38px;
-display:block;
-margin-bottom:12px;
-}
-
-.card span{
-font-size:30px;
-display:block;
-margin-bottom:10px;
-}
-
-.list{
-margin-top:15px;
-}
-
-.item{
-background:#151515;
-border:1px solid #333;
-padding:15px;
-margin-bottom:10px;
-border-radius:12px;
-display:flex;
-justify-content:space-between;
-}
-
-.withdraw-box{
-background:#151515;
-border-radius:15px;
-padding:15px;
-margin-top:15px;
-}
-
-input{
-width:100%;
-padding:12px;
-border:none;
-border-radius:10px;
-margin-top:10px;
-background:#222;
-color:white;
-}
-
-button{
-width:100%;
-padding:14px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:red;
-color:white;
-font-size:16px;
-}
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:85px;
-background:rgba(15,0,0,.95);
-display:flex;
-justify-content:space-around;
-align-items:center;
-border-top:1px solid rgba(255,0,0,.3);
-backdrop-filter:blur(10px);
-z-index:999;
-}
-
-.nav-btn{
-text-align:center;
-cursor:pointer;
-font-size:13px;
-transition:.2s;
-}
-
-.nav-btn:active{
-transform:scale(.9);
-}
-
-.active-nav{
-color:#ff4040;
-text-shadow:0 0 10px red;
-  }
-</style>
-</head>
-<body>
-
-<div class="header">
-⭐ Stars App
-</div>
-
-<!-- الصفحة الرئيسية -->
-
-<div id="home" class="page active">
-
-<div class="profile">
-<div class="avatar">☆</div>
-<div class="name">User</div>
-<div class="balance">125 ⭐</div>
-</div>
-
-<div class="cards">
-
-<div class="card">
-<span>🎮</span>
-الألعاب
-</div>
-
-<div class="card">
-<span>🎁</span>
-المهام
-</div>
-
-<div class="card">
-<span>⛏️</span>
-التعدين
-</div>
-
-<div class="card">
-<span>👥</span>
-الإحالات
-</div>
+    <div class="stars-box">
+        <span id="stars">0</span> ⭐
+    </div>
 
 </div>
 
-</div>
+<div class="home-page page">
 
-<!-- الألعاب -->
+    <div class="welcome-card">
+        <h2>اهلاً بك</h2>
+        <p>ابدأ بجمع النجوم الآن</p>
+    </div>
 
-<div id="games" class="page">
+    <div class="menu-grid">
 
-<h2>🎮 الألعاب</h2>
+        <button class="menu-btn"
+        onclick="openPage('earnPage')">
+            💰 ربح النجوم
+        </button>
 
-<div class="list">
+        <button class="menu-btn"
+        onclick="openPage('leaderboardPage')">
+            🏆 المتصدرين
+        </button>
 
-<div class="item">
-<span>💣 لعبة الألغام</span>
-<span>▶</span>
-</div>
+        <button class="menu-btn"
+        onclick="openPage('profilePage')">
+            👤 الملف الشخصي
+        </button>
 
-<div class="item">
-<span>🎲 الحظ</span>
-<span>▶</span>
-</div>
-
-<div class="item">
-<span>🎯 العجلة</span>
-<span>▶</span>
-</div>
-
-</div>
-
-</div>
-
-<!-- المتصدرين -->
-
-<div id="leaders" class="page">
-
-<h2>🏆 المتصدرين</h2>
-
-<div class="list">
-
-<div class="item">
-<span>#1 Ali</span>
-<span>2500⭐</span>
-</div>
-
-<div class="item">
-<span>#2 Ahmed</span>
-<span>2100⭐</span>
-</div>
-
-<div class="item">
-<span>#3 Mohammed</span>
-<span>1900⭐</span>
-</div>
+    </div>
 
 </div>
 
+<!-- PAGES -->
+
+<div id="profilePage" class="page" style="display:none;">
+    <h2>👤 الملف الشخصي</h2>
+    <p>الاسم: <span id="userName">Player</span></p>
+    <p>النجوم: <span id="profileStars">0</span></p>
 </div>
 
-<!-- السحب -->
+<div id="leaderboardPage" class="page" style="display:none;">
+    <h2>🏆 المتصدرين</h2>
 
-<div id="withdraw" class="page">
+    <div class="leader-item">
+        <span>🥇 Ahmed</span>
+        <span>5000 ⭐</span>
+    </div>
 
-<h2>💸 سحب النجوم</h2>
+    <div class="leader-item">
+        <span>🥈 Ali</span>
+        <span>3500 ⭐</span>
+    </div>
 
-<div class="withdraw-box">
-
-<input type="number" placeholder="عدد النجوم">
-
-<button>سحب إلى Telegram</button>
-
+    <div class="leader-item">
+        <span>🥉 Omar</span>
+        <span>2500 ⭐</span>
+    </div>
 </div>
 
+<div id="earnPage" class="page" style="display:none;">
+    <h2>💰 ربح النجوم</h2>
+
+    <button class="task-btn" onclick="watchAd()">
+        🎥 مشاهدة إعلان
+    </button>
+
+    <button class="task-btn" onclick="updateStars(50)">
+        ⭐ مهمة تجريبية +50
+    </button>
 </div>
 
-<!-- القائمة السفلية -->
+<script>
+
+let stars = 0;
+
+function updateStars(amount){
+    stars += amount;
+
+    document.getElementById("stars").innerText = stars;
+    
+    const profileStars =
+    document.getElementById("profileStars");
+
+    if(profileStars){
+        profileStars.innerText = stars;
+    }
+}
+
+function watchAd(){
+    updateStars(10);
+
+    alert("تمت إضافة 10 نجوم");
+}
+
+function openPage(pageId){
+
+    const pages =
+    document.querySelectorAll(".page");
+
+    pages.forEach(page=>{
+        page.style.display="none";
+    });
+
+    document.getElementById(pageId).style.display="block";
+}
+
+</script>
+
+<!-- BOTTOM NAVIGATION -->
 
 <div class="bottom-nav">
 
-<div class="nav-btn active-nav"
-onclick="showPage('home',this)">
-🏠<br>الرئيسية
-</div>
+    <button onclick="openPage('earnPage')">
+        💰
+        <span>ربح</span>
+    </button>
 
-<div class="nav-btn"
-onclick="showPage('games',this)">
-🎮<br>الألعاب
-</div>
+    <button onclick="openPage('leaderboardPage')">
+        🏆
+        <span>المتصدرين</span>
+    </button>
 
-<div class="nav-btn"
-onclick="showPage('leaders',this)">
-🏆<br>المتصدرين
-</div>
-
-<div class="nav-btn"
-onclick="showPage('withdraw',this)">
-💸<br>السحب
-</div>
+    <button onclick="openPage('profilePage')">
+        👤
+        <span>حسابي</span>
+    </button>
 
 </div>
 
 <script>
 
-function showPage(page,btn){
+window.onload = function(){
 
-document
-.querySelectorAll(".page")
-.forEach(p=>p.classList.remove("active"));
+    document.getElementById("earnPage").style.display = "block";
 
-document
-.getElementById(page)
-.classList.add("active");
+    const profileStars =
+    document.getElementById("profileStars");
 
-document
-.querySelectorAll(".nav-btn")
-.forEach(b=>b.classList.remove("active-nav"));
+    if(profileStars){
+        profileStars.innerText = stars;
+    }
 
-btn.classList.add("active-nav");
+};
 
-}
-.star-btn{
-position:absolute;
-top:-25px;
-left:50%;
-transform:translateX(-50%);
-width:70px;
-height:70px;
-border-radius:50%;
-background:linear-gradient(#ff3a3a,#900000);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:32px;
-box-shadow:
-0 0 30px rgba(255,0,0,.8);
-border:2px solid rgba(255,255,255,.15);
+</script>
+
+<!-- REFERRAL PAGE -->
+
+<div id="refPage" class="page" style="display:none;">
+
+    <h2>👥 دعوة الأصدقاء</h2>
+
+    <div class="welcome-card">
+
+        <p>شارك رابط الإحالة الخاص بك واربح نجوم.</p>
+
+        <input
+        type="text"
+        id="refLink"
+        value="https://t.me/YourBot?start=12345"
+        readonly
+        style="
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:12px;
+        text-align:center;
+        margin-top:10px;
+        ">
+
+        <button
+        class="task-btn"
+        onclick="copyRef()">
+            📋 نسخ الرابط
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function copyRef(){
+
+    const link =
+    document.getElementById("refLink");
+
+    link.select();
+    link.setSelectionRange(0, 99999);
+
+    navigator.clipboard.writeText(link.value);
+
+    alert("تم نسخ الرابط");
 }
 
   </script>
 
-<script type="module">
+  <!-- DAILY REWARD PAGE -->
 
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+<div id="dailyPage" class="page" style="display:none;">
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAv4XK0oKc1srvfpMmzWQAeYQikgOWGAzc",
-  authDomain: "test-for-mobeas-1beaa.firebaseapp.com",
-  projectId: "test-for-mobeas-1beaa",
-  storageBucket: "test-for-mobeas-1beaa.firebasestorage.app",
-  messagingSenderId: "274160242858",
-  appId: "1:274160242858:web:a45b083944f4bd7b65c0d3"
-};
+    <h2>🎁 المكافأة اليومية</h2>
 
-const app = initializeApp(firebaseConfig);
+    <div class="welcome-card">
 
-const db = getFirestore(app);
+        <p>استلم جائزتك اليومية مرة كل 24 ساعة.</p>
 
-console.log("Firebase connected");
+        <button
+        class="task-btn"
+        onclick="claimDailyReward()">
+            🎁 استلام المكافأة
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function claimDailyReward(){
+
+    const lastClaim =
+    localStorage.getItem("dailyReward");
+
+    const now = Date.now();
+
+    if(
+        lastClaim &&
+        now - Number(lastClaim) < 86400000
+    ){
+        alert("لقد استلمت المكافأة اليوم");
+        return;
+    }
+
+    updateStars(100);
+
+    localStorage.setItem(
+        "dailyReward",
+        now
+    );
+
+    alert("تمت إضافة 100 نجمة");
+}
 
 </script>
 
-</body>
-</html>
+<!-- WITHDRAW PAGE -->
+
+<div id="withdrawPage" class="page" style="display:none;">
+
+    <h2>💸 سحب النجوم</h2>
+
+    <div class="welcome-card">
+
+        <p>أدخل عدد النجوم التي تريد سحبها.</p>
+
+        <input
+        type="number"
+        id="withdrawAmount"
+        placeholder="عدد النجوم"
+        style="
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:12px;
+        margin-top:10px;
+        text-align:center;
+        ">
+
+        <button
+        class="task-btn"
+        onclick="withdrawStars()">
+            💸 طلب السحب
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function withdrawStars(){
+
+    const amount = Number(
+        document.getElementById("withdrawAmount").value
+    );
+
+    if(amount <= 0){
+        alert("أدخل عدد صحيح");
+        return;
+    }
+
+    if(amount > stars){
+        alert("عدد النجوم غير كافٍ");
+        return;
+    }
+
+    stars -= amount;
+
+    document.getElementById("stars").innerText = stars;
+
+    const profileStars =
+    document.getElementById("profileStars");
+
+    if(profileStars){
+        profileStars.innerText = stars;
+    }
+
+    alert(
+        "تم إرسال طلب سحب " +
+        amount +
+        " نجمة"
+    );
+}
+
+</script>
+
+<!-- SETTINGS PAGE -->
+
+<div id="settingsPage" class="page" style="display:none;">
+
+    <h2>⚙️ الإعدادات</h2>
+
+    <div class="welcome-card">
+
+        <button
+        class="task-btn"
+        onclick="changeName()">
+            ✏️ تغيير الاسم
+        </button>
+
+        <button
+        class="task-btn"
+        onclick="resetAccount()">
+            🗑️ إعادة تعيين الحساب
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function changeName(){
+
+    const newName = prompt(
+        "أدخل الاسم الجديد"
+    );
+
+    if(!newName) return;
+
+    document.getElementById(
+        "userName"
+    ).innerText = newName;
+
+    localStorage.setItem(
+        "userName",
+        newName
+    );
+}
+
+function resetAccount(){
+
+    const confirmReset =
+    confirm(
+        "هل أنت متأكد من إعادة تعيين الحساب؟"
+    );
+
+    if(!confirmReset) return;
+
+    stars = 0;
+
+    localStorage.clear();
+
+    document.getElementById(
+        "stars"
+    ).innerText = stars;
+
+    const profileStars =
+    document.getElementById(
+        "profileStars"
+    );
+
+    if(profileStars){
+        profileStars.innerText = stars;
+    }
+
+    alert("تمت إعادة التعيين");
+}
+
+window.addEventListener("load", ()=>{
+
+    const savedName =
+    localStorage.getItem("userName");
+
+    if(savedName){
+
+        document.getElementById(
+            "userName"
+        ).innerText = savedName;
+    }
+
+});
+
+</script>
+
+<!-- TELEGRAM USER DATA -->
+
+<script>
+
+if(window.Telegram &&
+   Telegram.WebApp){
+
+    Telegram.WebApp.ready();
+
+    const user =
+    Telegram.WebApp.initDataUnsafe?.user;
+
+    if(user){
+
+        const fullName =
+        (
+            user.first_name || ""
+        ) + " " +
+        (
+            user.last_name || ""
+        );
+
+        const userNameElement =
+        document.getElementById(
+            "userName"
+        );
+
+        if(
+            userNameElement &&
+            fullName.trim() !== ""
+        ){
+            userNameElement.innerText =
+            fullName;
+        }
+
+    }
+
+}
+
+</script>
+
+<!-- EXTRA MENU BUTTONS -->
+
+<script>
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+    const menu =
+    document.querySelector(
+    ".menu-grid"
+    );
+
+    if(!menu) return;
+
+    menu.innerHTML += `
+
+    <button class="menu-btn"
+    onclick="openPage('refPage')">
+    👥 الدعوات
+    </button>
+
+    <button class="menu-btn"
+    onclick="openPage('dailyPage')">
+    🎁 اليومية
+    </button>
+
+    <button class="menu-btn"
+    onclick="openPage('withdrawPage')">
+    💸 السحب
+    </button>
+
+    <button class="menu-btn"
+    onclick="openPage('settingsPage')">
+    ⚙️ الإعدادات
+    </button>
+
+    `;
+
+});
+
+      </script>
+
+      <!-- FINAL FIXES + INITIAL LOAD -->
+
+<script>
+
+function initApp(){
+
+    // إظهار الصفحة الرئيسية بالبداية
+    openPage("homePage");
+
+    // تحميل الاسم من التخزين إذا موجود
+    const savedName =
+    localStorage.getItem("userName");
+
+    if(savedName){
+        const el =
+        document.getElementById("userName");
+
+        if(el){
+            el.innerText = savedName;
+        }
+    }
+
+    // تحميل النجوم إذا محفوظة
+    const savedStars =
+    localStorage.getItem("stars");
+
+    if(savedStars){
+        stars = Number(savedStars);
+
+        document.getElementById("stars").innerText =
+        stars;
+    }
+
+}
+
+// حفظ النجوم تلقائياً كل ما تتغير
+function saveStars(){
+
+    localStorage.setItem("stars", stars);
+
+}
+
+// نعدل updateStars حتى تحفظ تلقائياً
+const oldUpdateStars = updateStars;
+
+updateStars = function(amount){
+
+    oldUpdateStars(amount);
+
+    saveStars();
+};
+
+window.onload = function(){
+    initApp();
+};
+
+</script>
