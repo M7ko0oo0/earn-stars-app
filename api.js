@@ -100,12 +100,22 @@ user.first_name;
 }
 
 function getStars(){
+
+if(!window.userId){
+return 0;
+}
+
 return Number(
 localStorage.getItem("stars_" + window.userId)
 ) || 0;
 }
 
 function addStars(amount){
+
+if(!window.userId){
+alert("User not loaded yet");
+return;
+}
 
 const current = getStars();
 const total = current + amount;
@@ -120,6 +130,11 @@ showPage("home");
 }
 
 function completeTask(amount){
+
+if(!window.userId){
+alert("User not loaded yet");
+return;
+}
 
 const current = getStars();
 const total = current + amount;
