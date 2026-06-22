@@ -37,7 +37,16 @@ if(page === "tasks"){
 app.innerHTML = `
 <div class="page">
 <h2>🎯 Tasks</h2>
-<p>Complete tasks to earn stars.</p>
+
+<div class="task-card">
+<p>📺 Watch Task (Demo)</p>
+
+<button onclick="completeTask(15)">
++15 Stars
+</button>
+
+</div>
+
 </div>
 `;
 }
@@ -96,17 +105,24 @@ localStorage.getItem("stars")
 
 function addStars(amount){
 
-const current =
-getStars();
+const current = getStars();
+const total = current + amount;
 
-const total =
-current + amount;
-
-localStorage.setItem(
-"stars",
-total
-);
+localStorage.setItem("stars", total);
 
 showPage("home");
 
 }
+
+function completeTask(amount){
+
+const current = getStars();
+const total = current + amount;
+
+localStorage.setItem("stars", total);
+
+alert("Task Completed +" + amount + " Stars ⭐");
+
+showPage("tasks");
+
+  }
