@@ -5,162 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Earn Stars</title>
 
+<link rel="stylesheet" href="style.css">
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-<style>
-body{
-margin:0;
-font-family:sans-serif;
-background:linear-gradient(180deg,#050814,#0b1024);
-color:white;
-text-align:center;
-}
-
-.header{
-padding:20px;
-font-size:24px;
-font-weight:bold;
-color:#00ffe5;
-text-shadow:0 0 10px #00ffe5;
-}
-
-.card{
-background:#111a33;
-margin:15px;
-padding:15px;
-border-radius:15px;
-box-shadow:0 0 12px #00ffe5;
-}
-
-.stars{
-font-size:30px;
-color:#ffd700;
-margin:10px;
-}
-
-.level{
-color:#7CFFB5;
-font-weight:bold;
-}
-
-button{
-background:#00ffe5;
-border:none;
-padding:12px;
-border-radius:10px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-margin:5px;
-}
-
-.task{
-background:#0e1630;
-margin:8px;
-padding:10px;
-border-radius:10px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-</style>
 </head>
 
 <body>
 
-<div class="header">⭐ Earn Stars</div>
-
-<div class="card">
-<div id="userName">User</div>
-
-<div class="stars">⭐ <span id="stars">0</span></div>
-<div class="level">Level: <span id="level">1</span></div>
-
-<button onclick="earnStars()">Earn +1 Star</button>
+<div class="header">
+⭐ Earn Stars
 </div>
 
-<div class="card">
-<h3>🎯 Tasks</h3>
+<div id="app"></div>
 
-<div class="task">
-<span>Daily Login</span>
-<button onclick="task(10)">+10</button>
+<div class="bottom-nav">
+<button>🏠</button>
+<button>🎮</button>
+<button>🎯</button>
+<button>👤</button>
 </div>
 
-<div class="task">
-<span>Tap Task</span>
-<button onclick="tapTask()">Start</button>
-</div>
-
-<p id="progress">0 / 10</p>
-</div>
-
-<script>
-const tg = window.Telegram.WebApp;
-tg.ready();
-
-let stars = 0;
-let level = 1;
-let taps = 0;
-
-// Telegram user
-const user = tg.initDataUnsafe?.user;
-if(user){
-document.getElementById("userName").innerText =
-user.first_name + " " + (user.last_name || "");
-}
-
-// load data
-stars = Number(localStorage.getItem("stars") || 0);
-level = Number(localStorage.getItem("level") || 1);
-taps = Number(localStorage.getItem("taps") || 0);
-
-updateUI();
-
-function earnStars(){
-stars += 1;
-save();
-updateUI();
-}
-
-function task(amount){
-stars += amount;
-save();
-updateUI();
-}
-
-function tapTask(){
-taps++;
-document.getElementById("progress").innerText = taps + " / 10";
-
-if(taps >= 10){
-stars += 20;
-taps = 0;
-alert("Completed +20 ⭐");
-}
-
-save();
-updateUI();
-}
-
-function updateUI(){
-document.getElementById("stars").innerText = stars;
-
-// level system
-if(stars >= 50) level = 2;
-if(stars >= 150) level = 3;
-if(stars >= 300) level = 4;
-
-document.getElementById("level").innerText = level;
-save();
-}
-
-function save(){
-localStorage.setItem("stars", stars);
-localStorage.setItem("level", level);
-localStorage.setItem("taps", taps);
-}
-</script>
-
+<script src="api.js"></script>
 </body>
 </html>
