@@ -86,6 +86,8 @@ Telegram.WebApp.initDataUnsafe?.user;
 
 if(user){
 
+window.userId = user.id;
+
 document.getElementById(
 "username"
 ).innerHTML =
@@ -99,7 +101,7 @@ user.first_name;
 
 function getStars(){
 return Number(
-localStorage.getItem("stars")
+localStorage.getItem("stars_" + window.userId)
 ) || 0;
 }
 
@@ -108,7 +110,10 @@ function addStars(amount){
 const current = getStars();
 const total = current + amount;
 
-localStorage.setItem("stars", total);
+localStorage.setItem(
+"stars_" + window.userId,
+total
+);
 
 showPage("home");
 
@@ -119,10 +124,13 @@ function completeTask(amount){
 const current = getStars();
 const total = current + amount;
 
-localStorage.setItem("stars", total);
+localStorage.setItem(
+"stars_" + window.userId,
+total
+);
 
 alert("Task Completed +" + amount + " Stars ⭐");
 
 showPage("tasks");
 
-  }
+}
