@@ -1,36 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Earn Stars</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earn Stars</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+background: #0b0f1a;
+color:white;
+text-align:center;
+}
+
+.header{
+padding:20px;
+font-size:22px;
+font-weight:bold;
+color:#00ffe5;
+text-shadow:0 0 10px #00ffe5;
+}
+
+.card{
+background:#11182b;
+margin:20px;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 15px #00ffe5;
+}
+
+button{
+background:#00ffe5;
+border:none;
+padding:15px;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 10px #00ffe5;
+}
+
+button:active{
+transform:scale(0.95);
+}
+
+.stars{
+font-size:30px;
+margin:10px 0;
+color:#ffd700;
+}
+</style>
 </head>
+
 <body>
 
-<div class="topbar">
-  ⭐ Earn Stars
-</div>
+<div class="header">⭐ Earn Stars</div>
 
 <div class="card">
-  <h2>Your Balance</h2>
-  <div id="balance">0 Stars</div>
+<div id="userName">User</div>
+
+<div class="stars">⭐ <span id="stars">0</span></div>
+
+<button onclick="earnStars()">Earn +1 Star</button>
 </div>
 
-<button onclick="earn()">+ Earn Stars</button>
+<script>
+const tg = window.Telegram.WebApp;
+tg.ready();
 
-<div class="card">
-  <h3>Daily Missions</h3>
-  <p>✔ Login daily</p>
-  <p>✔ Click earn button</p>
-  <p>✔ Complete tasks</p>
-</div>
+let stars = 0;
 
-<div class="card">
-  <h3>Level</h3>
-  <div id="level">Level 1</div>
-</div>
+// user name from telegram
+const user = tg.initDataUnsafe?.user;
+if(user){
+document.getElementById("userName").innerText =
+user.first_name + " " + (user.last_name || "");
+}
 
-<script src="script.js"></script>
+// load saved data
+if(localStorage.getItem("stars")){
+stars = Number(localStorage.getItem("stars"));
+document.getElementById("stars").innerText = stars;
+}
+
+function earnStars(){
+stars++;
+document.getElementById("stars").innerText = stars;
+localStorage.setItem("stars", stars);
+}
+</script>
+
 </body>
 </html>
