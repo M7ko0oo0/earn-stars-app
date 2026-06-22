@@ -32,3 +32,54 @@ border:none;
 color:white;
 font-size:22px;
 }
+
+#app{
+padding:20px;
+padding-bottom:100px;
+}
+
+.page{
+animation:fade .3s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.page h2{
+margin-bottom:10px;
+color:#00ffe5;
+}
+
+.page p{
+opacity:.9;
+}
+
+.stars-card{
+margin-top:20px;
+background:#111a33;
+padding:20px;
+border-radius:15px;
+border:1px solid #00ffe5;
+font-size:22px;
+font-weight:bold;
+text-align:center;
+box-shadow:0 0 20px rgba(0,255,229,.25);
+}
+
+.bottom-nav button{
+cursor:pointer;
+transition:.3s;
+}
+
+.bottom-nav button:hover{
+transform:scale(1.1);
+color:#00ffe5;
+}
