@@ -8,9 +8,18 @@ app.innerHTML = `
 <h2>🏠 Home</h2>
 <p>Welcome to Earn Stars</p>
 
+<p>Welcome to Earn Stars</p>
+
 <div class="stars-card">
-⭐ Stars: <span id="stars">0</span>
+⭐ Stars: <span id="stars">${getStars()}</span>
 </div>
+
+<br>
+
+<button onclick="addStars(10)">
++10 Stars
+</button>
+
 </div>
 `;
 }
@@ -76,5 +85,28 @@ user.first_name;
 }
 
 }
+
+}
+
+function getStars(){
+return Number(
+localStorage.getItem("stars")
+) || 0;
+}
+
+function addStars(amount){
+
+const current =
+getStars();
+
+const total =
+current + amount;
+
+localStorage.setItem(
+"stars",
+total
+);
+
+showPage("home");
 
 }
