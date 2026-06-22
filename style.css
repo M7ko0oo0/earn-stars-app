@@ -1,1 +1,34 @@
+body{
+margin:0;
+background:#070b18;
+font-family:sans-serif;
+color:white;
+}
 
+.header{
+text-align:center;
+padding:20px;
+font-size:24px;
+font-weight:bold;
+color:#00ffe5;
+text-shadow:0 0 10px #00ffe5;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#111a33;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+border-top:1px solid #00ffe5;
+}
+
+.bottom-nav button{
+background:none;
+border:none;
+color:white;
+font-size:22px;
+}
