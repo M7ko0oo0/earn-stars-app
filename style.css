@@ -16,22 +16,45 @@ background:#0b1023;
 padding:20px;
 }
 
+/* ⭐ STAR CARD WITH BACKGROUND IMAGE */
 .star-card{
 width:90%;
 height:200px;
 margin:20px auto;
 border-radius:20px;
 
-background:#1a1a1a;
+background-image:url("./1782246911197.png");
+background-size:cover;
+background-position:center;
 
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+
+position:relative;
+overflow:hidden;
 }
 
+/* overlay غامق حتى النص يبين */
+.star-card::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.5);
+}
+
+/* النص فوق الصورة */
+.star-card h2,
+.stars-box{
+position:relative;
+z-index:1;
+}
+
+/* النجوم */
 .stars-box{
 margin-top:10px;
 font-size:26px;
 color:gold;
+font-weight:bold;
 }
