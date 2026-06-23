@@ -16,19 +16,17 @@ background:#0b1023;
 padding:20px;
 }
 
-/* ⭐ STAR CARD WITH BACKGROUND IMAGE */
+/* ⭐ STAR CARD */
 .star-card{
 width:90%;
 height:200px;
 margin:20px auto;
 border-radius:20px;
 
-.star-card{
 background-image: url("./1782246911197.png");
 background-size: cover;
 background-position: center;
-}
-  
+
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -38,7 +36,7 @@ position:relative;
 overflow:hidden;
 }
 
-/* overlay غامق حتى النص يبين */
+/* overlay غامق */
 .star-card::before{
 content:"";
 position:absolute;
@@ -59,4 +57,21 @@ margin-top:10px;
 font-size:26px;
 color:gold;
 font-weight:bold;
+}
+
+/* 🔥 زر التعدين */
+.mine-btn{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:12px;
+background:#ffb300;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.2s;
+}
+
+.mine-btn:hover{
+transform:scale(1.05);
 }
