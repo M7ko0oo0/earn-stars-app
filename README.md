@@ -1,2 +1,0 @@
-# earn-stars-app
-Public
