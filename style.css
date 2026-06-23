@@ -44,14 +44,14 @@ margin-bottom:15px;
 opacity:.9;
 }
 
-/* ⭐ NEW STAR CARD (اللي ضفناها) */
+/* ⭐ STAR CARD (FIXED) */
 .star-card {
 width: 90%;
 height: 220px;
 margin: 20px auto;
 border-radius: 20px;
 
-background-image: url("images/1782246911197.png");
+background-image: url("./1782246911197.png");
 background-size: cover;
 background-position: center;
 
@@ -61,11 +61,17 @@ overflow: hidden;
 box-shadow: 0 0 30px rgba(162,89,255,.5);
 }
 
+.star-card::before {
+content: "";
+position: absolute;
+inset: 0;
+background: rgba(0,0,0,0.45);
+border-radius: 20px;
+}
+
 .star-overlay {
 position: absolute;
 inset: 0;
-
-background: rgba(0,0,0,0.45);
 
 display: flex;
 flex-direction: column;
@@ -75,6 +81,7 @@ align-items: center;
 text-align: center;
 
 color: white;
+z-index: 1;
 }
 
 .star-overlay h2 {
