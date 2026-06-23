@@ -1,6 +1,6 @@
 body{
 margin:0;
-background:#070b18;
+background:#050816;
 font-family:sans-serif;
 color:white;
 }
@@ -10,27 +10,9 @@ text-align:center;
 padding:20px;
 font-size:24px;
 font-weight:bold;
-color:#00ffe5;
-text-shadow:0 0 10px #00ffe5;
-}
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#111a33;
-display:flex;
-justify-content:space-around;
-padding:12px 0;
-border-top:1px solid #00ffe5;
-}
-
-.bottom-nav button{
-background:none;
-border:none;
 color:white;
-font-size:22px;
+background:#0b1023;
+box-shadow:0 0 20px rgba(162,89,255,.3);
 }
 
 #app{
@@ -54,8 +36,8 @@ transform:translateY(0);
 }
 
 .page h2{
-margin-bottom:10px;
-color:#00ffe5;
+color:#c77dff;
+margin-bottom:15px;
 }
 
 .page p{
@@ -64,22 +46,130 @@ opacity:.9;
 
 .stars-card{
 margin-top:20px;
-background:#111a33;
-padding:20px;
-border-radius:15px;
-border:1px solid #00ffe5;
-font-size:22px;
-font-weight:bold;
+padding:25px;
+border-radius:25px;
+
+background:
+linear-gradient(
+135deg,
+#1b0f45,
+#4b0082,
+#6a00ff
+);
+
+border:1px solid rgba(255,255,255,.1);
+
+box-shadow:
+0 0 30px rgba(162,89,255,.5);
+
 text-align:center;
-box-shadow:0 0 20px rgba(0,255,229,.25);
+}
+
+.stars-card h1{
+font-size:48px;
+margin:10px 0;
+}
+
+.stars-card span{
+font-size:60px;
+}
+
+.menu-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:20px;
+}
+
+.menu-btn{
+height:120px;
+border:none;
+border-radius:20px;
+
+background:#0b1023;
+
+color:white;
+font-size:18px;
+
+box-shadow:
+0 0 15px rgba(162,89,255,.2);
+
+cursor:pointer;
+}
+
+.menu-btn i{
+display:block;
+font-size:34px;
+margin-bottom:10px;
+color:#c77dff;
+}
+
+.withdraw-btn{
+width:100%;
+margin-top:20px;
+padding:18px;
+
+border:none;
+border-radius:20px;
+
+font-size:20px;
+font-weight:bold;
+
+color:white;
+
+background:
+linear-gradient(
+90deg,
+#8b5a00,
+#ffb300
+);
+
+box-shadow:
+0 0 20px rgba(255,179,0,.4);
+
+cursor:pointer;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:75px;
+
+background:#0b1023;
+
+display:flex;
+justify-content:space-around;
+align-items:center;
+
+border-top:1px solid rgba(255,255,255,.08);
 }
 
 .bottom-nav button{
+background:none;
+border:none;
+
+color:#bdbdbd;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+font-size:11px;
+
 cursor:pointer;
-transition:.3s;
+}
+
+.bottom-nav i{
+font-size:22px;
+margin-bottom:4px;
+}
+
+.bottom-nav button.active{
+color:#c77dff;
 }
 
 .bottom-nav button:hover{
-transform:scale(1.1);
-color:#00ffe5;
-}
+color:#c77dff;
+  }
