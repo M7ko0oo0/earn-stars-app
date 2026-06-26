@@ -23,9 +23,9 @@ height:200px;
 margin:20px auto;
 border-radius:20px;
 
-background-image: url("./1782246911197.png");
-background-size: cover;
-background-position: center;
+background-image:url("./1782246911197.png");
+background-size:cover;
+background-position:center;
 
 display:flex;
 flex-direction:column;
@@ -36,22 +36,19 @@ position:relative;
 overflow:hidden;
 }
 
-/* overlay غامق */
 .star-card::before{
 content:"";
 position:absolute;
 inset:0;
-background:rgba(0,0,0,0.5);
+background:rgba(0,0,0,.5);
 }
 
-/* النص فوق الصورة */
 .star-card h2,
 .stars-box{
 position:relative;
 z-index:1;
 }
 
-/* النجوم */
 .stars-box{
 margin-top:10px;
 font-size:26px;
@@ -59,19 +56,62 @@ color:gold;
 font-weight:bold;
 }
 
-/* 🔥 زر التعدين */
-.mine-btn{
-margin-top:15px;
-padding:10px 20px;
-border:none;
-border-radius:12px;
-background:#ffb300;
-color:black;
-font-weight:bold;
-cursor:pointer;
-transition:0.2s;
+/* ===== القائمة الرئيسية ===== */
+
+.menu-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:25px;
 }
 
-.mine-btn:hover{
-transform:scale(1.05);
+.menu-img{
+width:100%;
+display:block;
+border-radius:20px;
+cursor:pointer;
+transition:.2s;
+box-shadow:0 0 12px rgba(0,0,0,.35);
+}
+
+.menu-img:hover{
+transform:scale(1.03);
+}
+
+.withdraw{
+grid-column:1/3;
+}
+
+/* ===== الشريط السفلي ===== */
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:70px;
+background:#0b1023;
+display:flex;
+justify-content:space-around;
+align-items:center;
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+.bottom-nav button{
+background:none;
+border:none;
+color:#cfcfcf;
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:11px;
+}
+
+.bottom-nav i{
+font-size:20px;
+margin-bottom:3px;
+}
+
+.bottom-nav button.active{
+color:#ffd54a;
 }
