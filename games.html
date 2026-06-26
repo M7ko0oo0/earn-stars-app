@@ -2,103 +2,86 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Earn Stars - Mines</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="games.css">
+<title>Earn Stars | Mines</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:sans-serif;
-}
-
-body{
-background:#050816;
-color:#fff;
-overflow-x:hidden;
-}
-
-button,
-input,
-select{
-font-family:sans-serif;
-outline:none;
-border:none;
-}
-
-button{
-cursor:pointer;
-}
-
-</style>
+<link rel="stylesheet"
+href="games.css">
 
 </head>
 
 <body>
 
-<div class="background"></div>
+<div class="bg"></div>
 
 <div class="container">
 
 <header class="top-bar">
 
-<button class="back-btn" onclick="history.back()">
+<button
+class="back-btn"
+onclick="history.back()">
+
 ←
+
 </button>
 
-<h2 class="page-title">
-💣 Mines
+<h2 class="title">
+
+💣 لعبة الألغام
+
 </h2>
 
-<div class="stars-box">
+<div class="balance">
 
-<span id="userStars">
+<span id="balanceValue">
+
 0
+
 </span>
 
 <span>
+
 ⭐
+
 </span>
 
 </div>
 
 </header>
 
-<section class="control-card">
+<div class="game-card">
 
-<h3>
-بدء جولة جديدة
-</h3>
-
-<div class="input-group">
+<div class="input-box">
 
 <label>
+
 قيمة الرهان
+
 </label>
 
 <input
 type="number"
-id="betAmount"
+id="bet"
 value="10"
 min="1">
 
 </div>
 
-<div class="input-group">
+<div class="input-box">
 
 <label>
+
 عدد الألغام
+
 </label>
 
-<select id="mineCount">
+<select id="mines">
 
 <option value="1">1</option>
 <option value="2">2</option>
@@ -113,29 +96,37 @@ min="1">
 
 </div>
 
-<div class="stats">
+<div class="game-stats">
 
-<div class="stat">
+<div>
 
-<span>
+<p>
+
 المضاعف
-</span>
 
-<b id="multiplier">
+</p>
+
+<h3 id="multiplier">
+
 1.00x
-</b>
+
+</h3>
 
 </div>
 
-<div class="stat">
+<div>
 
-<span>
+<p>
+
 الربح
-</span>
 
-<b id="profit">
+</p>
+
+<h3 id="profit">
+
 0
-</b>
+
+</h3>
 
 </div>
 
@@ -152,7 +143,7 @@ onclick="startGame()">
 </button>
 
 <button
-class="cashout-btn"
+class="cash-btn"
 onclick="cashOut()">
 
 سحب الأرباح
@@ -161,31 +152,24 @@ onclick="cashOut()">
 
 </div>
 
-</section>
-
-<section class="game-area">
-
-<div id="gameBoard" class="board">
-  
-<!-- الصف الأول -->
-<div class="cell" data-index="0"></div>
+<div
+id="board"
+class="board">
+  <div class="cell" data-index="0"></div>
 <div class="cell" data-index="1"></div>
 <div class="cell" data-index="2"></div>
 <div class="cell" data-index="3"></div>
 
-<!-- الصف الثاني -->
 <div class="cell" data-index="4"></div>
 <div class="cell" data-index="5"></div>
 <div class="cell" data-index="6"></div>
 <div class="cell" data-index="7"></div>
 
-<!-- الصف الثالث -->
 <div class="cell" data-index="8"></div>
 <div class="cell" data-index="9"></div>
 <div class="cell" data-index="10"></div>
 <div class="cell" data-index="11"></div>
 
-<!-- الصف الرابع -->
 <div class="cell" data-index="12"></div>
 <div class="cell" data-index="13"></div>
 <div class="cell" data-index="14"></div>
@@ -193,45 +177,109 @@ onclick="cashOut()">
 
 </div>
 
-</section>
+<div class="game-info">
 
-<section class="game-info">
+<div class="info-item">
 
-<div class="info-card">
+<span>
 
-<div class="info-row">
-<span>الحالة</span>
-<b id="gameStatus">
-بانتظار بدء اللعبة
+الحالة
+
+</span>
+
+<b id="status">
+
+بانتظار البدء
+
 </b>
+
 </div>
 
-<div class="info-row">
-<span>المربعات المفتوحة</span>
-<b id="openedCells">
+<div class="info-item">
+
+<span>
+
+المربعات المفتوحة
+
+</span>
+
+<b id="opened">
+
 0 / 16
+
 </b>
+
 </div>
 
-<div class="info-row">
-<span>الألغام</span>
-<b id="mineText">
+<div class="info-item">
+
+<span>
+
+عدد الألغام
+
+</span>
+
+<b id="mineCountView">
+
 0
+
 </b>
+
 </div>
 
-<div class="info-row">
-<span>النجوم</span>
-<b id="starText">
+<div class="info-item">
+
+<span>
+
+عدد النجوم
+
+</span>
+
+<b id="starCount">
+
 0
+
 </b>
-</div>
 
 </div>
 
-</section>
+</div>
+<div class="actions">
+
+<button
+class="start-btn-full"
+onclick="startGame()">
+
+🎮 ابدأ الجولة
+
+</button>
+
+<button
+class="cashout-btn"
+onclick="cashOut()">
+
+💰 سحب الأرباح
+
+</button>
+
+</div>
+
+</div>
+
+<footer class="footer">
+
+<p>
+
+Earn Stars © 2026
+
+</p>
+
+</footer>
+
+</div>
 
 <script src="games.js"></script>
 
 </body>
-  </html>
+
+</html>
