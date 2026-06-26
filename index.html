@@ -162,15 +162,25 @@ color:#ffd54a;
 
 <div class="menu-grid">
 
-<img src="1782489572846.png" class="menu-img mining" onclick="openGames()">
-<img src="1782489631217.png" class="menu-img withdraw" onclick="openMining()">
-<img src="1782489809478.png" class="menu-img ads" onclick="openAds()">
-<img src="1782489961499.png" class="menu-img leaders" onclick="openLeaders()">
-<img src="1782490032975.png" class="menu-img games" onclick="openWithdraw()">
+<img src="1782489572846.png" class="menu-img mining" onclick="changePage(openGames)">
+<img src="1782489631217.png" class="menu-img withdraw" onclick="changePage(openMining)">
+<img src="1782489809478.png" class="menu-img ads" onclick="changePage(openAds)">
+<img src="1782489961499.png" class="menu-img leaders" onclick="changePage(openLeaders)">
+<img src="1782490032975.png" class="menu-img games" onclick="changePage(openWithdraw)">
 
 </div>
 
 </div>
 
+  <script>
+function changePage(callback){
+    document.body.classList.add("fade-out");
+
+    setTimeout(function(){
+        callback();
+    },250);
+}
+  </script>
+  
 </body>
 </html>
