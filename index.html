@@ -29,6 +29,7 @@ background:#0b1023;
 
 #app{
 padding:20px;
+padding-bottom:90px;
 }
 
 /* ⭐ STAR CARD */
@@ -71,7 +72,7 @@ color:gold;
 font-weight:bold;
 }
 
-/* ===== القائمة الرئيسية (تعديل فقط هنا) ===== */
+/* ===== الشبكة الصحيحة ===== */
 
 .menu-grid{
 display:grid;
@@ -83,20 +84,21 @@ grid-template-areas:
 
 gap:15px;
 margin-top:25px;
-
-/* 🔥 التعديل الوحيد */
-grid-auto-rows: 140px;
 }
 
-/* ربط الأماكن */
-.mining{ grid-area:mining; }
-.games{ grid-area:games; }
-.ads{ grid-area:ads; }
-.leaders{ grid-area:leaders; }
-.withdraw{ grid-area:withdraw; }
+/* ربط العناصر */
+.mining{ grid-area:mining; height:140px; }
+.games{ grid-area:games; height:140px; }
+.ads{ grid-area:ads; height:140px; }
+.leaders{ grid-area:leaders; height:140px; }
 
-/* ===== الصور (تعديل بسيط فقط) ===== */
+/* السحب كامل */
+.withdraw{
+grid-area:withdraw;
+height:160px;
+}
 
+/* الصور */
 .menu-img{
 width:100%;
 height:100%;
@@ -104,12 +106,12 @@ display:block;
 border-radius:20px;
 cursor:pointer;
 transition:.2s;
-box-shadow:0 0 12px rgba(0,0,0,.35);
 object-fit:cover;
+box-shadow:0 0 12px rgba(0,0,0,.35);
 }
 
 .menu-img:hover{
-transform:scale(1.03);
+transform:scale(1.05);
 }
 
 /* ===== الشريط السفلي ===== */
@@ -135,6 +137,7 @@ display:flex;
 flex-direction:column;
 align-items:center;
 font-size:11px;
+cursor:pointer;
 }
 
 .bottom-nav i{
@@ -144,11 +147,6 @@ margin-bottom:3px;
 
 .bottom-nav button.active{
 color:#ffd54a;
-}
-
-.ads,
-.leaders{
-    margin-top: -45px;
 }
 
 </style>
