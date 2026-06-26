@@ -72,15 +72,15 @@ color:gold;
 font-weight:bold;
 }
 
-/* ===== الشبكة الصحيحة ===== */
+/* ===== الشبكة (بعد التبديل) ===== */
 
 .menu-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
 grid-template-areas:
-"mining games"
+"mining withdraw"
 "ads leaders"
-"withdraw withdraw";
+"games games";
 
 gap:15px;
 margin-top:25px;
@@ -88,15 +88,11 @@ margin-top:25px;
 
 /* ربط العناصر */
 .mining{ grid-area:mining; height:140px; }
-.games{ grid-area:games; height:140px; }
+.games{ grid-area:games; height:160px; }
 .ads{ grid-area:ads; height:140px; }
 .leaders{ grid-area:leaders; height:140px; }
 
-/* السحب كامل */
-.withdraw{
-grid-area:withdraw;
-height:160px;
-}
+.withdraw{ grid-area:withdraw; height:140px; }
 
 /* الصور */
 .menu-img{
@@ -167,10 +163,10 @@ color:#ffd54a;
 <div class="menu-grid">
 
 <img src="1782489572846.png" class="menu-img mining" onclick="openGames()">
-<img src="1782489631217.png" class="menu-img games" onclick="openMining()">
+<img src="1782489631217.png" class="menu-img withdraw" onclick="openMining()">
 <img src="1782489809478.png" class="menu-img ads" onclick="openAds()">
 <img src="1782489961499.png" class="menu-img leaders" onclick="openLeaders()">
-<img src="1782490032975.png" class="menu-img withdraw" onclick="openWithdraw()">
+<img src="1782490032975.png" class="menu-img games" onclick="openWithdraw()">
 
 </div>
 
