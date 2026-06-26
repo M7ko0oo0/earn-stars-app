@@ -13,80 +13,128 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <style>
 
-/* =========================
-   عام
-========================= */
-
 body{
-  margin:0;
-  font-family:Arial;
-  background:#0f0f1a;
-  color:white;
+margin:0;
+background:#050816;
+font-family:sans-serif;
+color:white;
 }
 
 .header{
-  text-align:center;
-  padding:15px;
-  font-size:20px;
-  font-weight:bold;
+text-align:center;
+padding:13px;
+font-size:20px;
+background:#0b1023;
 }
 
-/* =========================
-   كارد الرصيد
-========================= */
+#app{
+padding:20px;
+}
 
+/* ⭐ STAR CARD */
 .star-card{
-  background:#1a1a2e;
-  margin:15px;
-  padding:20px;
-  border-radius:20px;
-  text-align:center;
+width:90%;
+height:200px;
+margin:20px auto;
+border-radius:20px;
+
+background-image:url("./1782246911197.png");
+background-size:cover;
+background-position:center;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+position:relative;
+overflow:hidden;
+}
+
+.star-card::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.5);
+}
+
+.star-card h2,
+.stars-box{
+position:relative;
+z-index:1;
 }
 
 .stars-box{
-  font-size:22px;
-  margin-top:10px;
+margin-top:10px;
+font-size:26px;
+color:gold;
+font-weight:bold;
 }
 
-/* =========================
-   القائمة الرئيسية
-========================= */
+/* ===== القائمة الرئيسية ===== */
 
 .menu-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-areas:
-    "mining games"
-    "ads leaders"
-    "withdraw withdraw";
-  gap:12px;
-  margin:15px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:25px;
 }
 
 .menu-img{
-  width:100%;
-  height:140px;
-  object-fit:cover;
-  border-radius:18px;
-  display:block;
-  box-shadow:0 8px 20px rgba(0,0,0,0.4);
-  transition:0.2s;
+width:100%;
+display:block;
+border-radius:20px;
+cursor:pointer;
+transition:.2s;
+box-shadow:0 0 12px rgba(0,0,0,.35);
+object-fit:cover;
 }
 
-.menu-img:active{
-  transform:scale(0.97);
+.menu-img:hover{
+transform:scale(1.03);
 }
-
-/* توزيع الكروت */
-
-.mining{grid-area:mining;}
-.games{grid-area:games;}
-.ads{grid-area:ads;}
-.leaders{grid-area:leaders;}
 
 .withdraw{
-  grid-area:withdraw;
-  height:160px;
+grid-column:1/3;
+}
+
+/* ===== الشريط السفلي ===== */
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:70px;
+background:#0b1023;
+display:flex;
+justify-content:space-around;
+align-items:center;
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+.bottom-nav button{
+background:none;
+border:none;
+color:#cfcfcf;
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:11px;
+}
+
+.bottom-nav i{
+font-size:20px;
+margin-bottom:3px;
+}
+
+.bottom-nav button.active{
+color:#ffd54a;
+}
+
+.ads,
+.leaders{
+    margin-top: -45px;
 }
 
 </style>
@@ -98,33 +146,21 @@ body{
 
 <div id="app">
 
-    <!-- كارد الرصيد -->
-    <div class="star-card">
+<div class="star-card">
+<h2 class="title">رصيد النجوم</h2>
+<h2 id="userName">User</h2>
+<div class="stars-box">⭐ <span id="starsCount">0</span></div>
+</div>
 
-        <h2 class="title">رصيد النجوم</h2>
+<div class="menu-grid">
 
-        <h2 id="userName">User</h2>
+<img src="1782489572846.png" class="menu-img mining" onclick="openGames()">
+<img src="1782489631217.png" class="menu-img games" onclick="openMining()">
+<img src="1782489809478.png" class="menu-img ads" onclick="openAds()">
+<img src="1782489961499.png" class="menu-img leaders" onclick="openLeaders()">
+<img src="1782490032975.png" class="menu-img withdraw" onclick="openWithdraw()">
 
-        <div class="stars-box">
-            ⭐ <span id="starsCount">0</span>
-        </div>
-
-    </div>
-
-    <!-- القائمة -->
-    <div class="menu-grid">
-
-        <img src="1782489572846.png" class="menu-img mining" onclick="openMining()">
-
-        <img src="1782489631217.png" class="menu-img games" onclick="openGames()">
-
-        <img src="1782489809478.png" class="menu-img ads" onclick="openAds()">
-
-        <img src="1782489961499.png" class="menu-img leaders" onclick="openLeaders()">
-
-        <img src="1782490032975.png" class="menu-img withdraw" onclick="openWithdraw()">
-
-    </div>
+</div>
 
 </div>
 
