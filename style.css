@@ -17,7 +17,7 @@ font-weight:bold;
 /* ===== التطبيق ===== */
 #app{
 padding:20px;
-padding-bottom:90px; /* حتى ما يغطيه الشريط السفلي */
+padding-bottom:90px;
 }
 
 /* ⭐ STAR CARD */
@@ -65,7 +65,7 @@ font-weight:bold;
 text-shadow:0 0 10px rgba(255,215,0,.4);
 }
 
-/* صور الأزرار */
+/* ===== القائمة (تعديل فقط) ===== */
 .menu-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -76,22 +76,33 @@ grid-template-areas:
 
 gap:15px;
 margin-top:25px;
+
+/* 🔥 مهم حتى يثبت شكل الكروت */
+grid-auto-rows:140px;
 }
 
-/* ربط الأزرار بالأماكن */
+/* ربط الأزرار */
 .mining{ grid-area:mining; }
 .games{ grid-area:games; }
 .ads{ grid-area:ads; }
 .leaders{ grid-area:leaders; }
 .withdraw{ grid-area:withdraw; }
 
-.menu-img:hover{
-transform:scale(1.05);
+/* صور الأزرار (تصليح فقط بدون حذف) */
+.menu-img{
+width:100%;
+height:100%; /* 🔥 مهم */
+display:block;
+border-radius:20px;
+cursor:pointer;
+transition:.2s;
+box-shadow:0 0 12px rgba(0,0,0,.35);
+object-fit:cover;
 }
 
-/* زر العرض الكامل */
-.withdraw{
-grid-column:1/3;
+/* hover */
+.menu-img:hover{
+transform:scale(1.05);
 }
 
 /* ===== الشريط السفلي ===== */
@@ -135,8 +146,8 @@ margin-bottom:3px;
 color:#ffd54a;
 }
 
-/* ===== تحسين ترتيب الأزرار ===== */
+/* تحسين بسيط */
 .ads,
 .leaders{
 margin-top:-45px;
-    }
+}
