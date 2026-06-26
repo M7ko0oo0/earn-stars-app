@@ -5,15 +5,19 @@ font-family:sans-serif;
 color:white;
 }
 
+/* ===== الهيدر ===== */
 .header{
 text-align:center;
 padding:13px;
 font-size:20px;
 background:#0b1023;
+font-weight:bold;
 }
 
+/* ===== التطبيق ===== */
 #app{
 padding:20px;
+padding-bottom:90px; /* حتى ما يغطيه الشريط السفلي */
 }
 
 /* ⭐ STAR CARD */
@@ -23,7 +27,6 @@ height:200px;
 margin:20px auto;
 border-radius:20px;
 
-/* 🔥 رجعنا الصورة هنا */
 background-image:url("./1782246911197.png");
 background-size:cover;
 background-position:center;
@@ -35,15 +38,19 @@ align-items:center;
 
 position:relative;
 overflow:hidden;
+
+box-shadow:0 10px 25px rgba(0,0,0,.4);
 }
 
+/* تغميق الصورة */
 .star-card::before{
 content:"";
 position:absolute;
 inset:0;
-background:rgba(0,0,0,.5);
+background:rgba(0,0,0,.55);
 }
 
+/* النص فوق الصورة */
 .star-card h2,
 .stars-box{
 position:relative;
@@ -52,13 +59,13 @@ z-index:1;
 
 .stars-box{
 margin-top:10px;
-font-size:26px;
+font-size:30px;
 color:gold;
 font-weight:bold;
+text-shadow:0 0 10px rgba(255,215,0,.4);
 }
 
-/* ===== القائمة الرئيسية ===== */
-
+/* ===== القائمة ===== */
 .menu-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -66,26 +73,27 @@ gap:15px;
 margin-top:25px;
 }
 
+/* صور الأزرار */
 .menu-img{
 width:100%;
 display:block;
 border-radius:20px;
 cursor:pointer;
-transition:.2s;
+transition:.2s ease;
 box-shadow:0 0 12px rgba(0,0,0,.35);
 object-fit:cover;
 }
 
 .menu-img:hover{
-transform:scale(1.03);
+transform:scale(1.05);
 }
 
+/* زر العرض الكامل */
 .withdraw{
 grid-column:1/3;
 }
 
 /* ===== الشريط السفلي ===== */
-
 .bottom-nav{
 position:fixed;
 bottom:0;
@@ -97,6 +105,7 @@ display:flex;
 justify-content:space-around;
 align-items:center;
 border-top:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
 }
 
 .bottom-nav button{
@@ -107,6 +116,13 @@ display:flex;
 flex-direction:column;
 align-items:center;
 font-size:11px;
+cursor:pointer;
+transition:.2s;
+}
+
+.bottom-nav button:hover{
+color:#ffd54a;
+transform:translateY(-2px);
 }
 
 .bottom-nav i{
@@ -118,7 +134,8 @@ margin-bottom:3px;
 color:#ffd54a;
 }
 
+/* ===== تحسين ترتيب الأزرار ===== */
 .ads,
 .leaders{
-    margin-top: -45px;
-}
+margin-top:-45px;
+    }
