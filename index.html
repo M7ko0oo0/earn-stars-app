@@ -161,12 +161,16 @@ color:#ffd54a;
 </div>
 
 <div class="menu-grid">
+  
+<img src="1782489572846.png" class="menu-img mining" onclick="openPage('miningPage')">
 
-<img src="1782489572846.png" class="menu-img mining" onclick="changePage(openGames)">
-<img src="1782489631217.png" class="menu-img withdraw" onclick="changePage(openMining)">
-<img src="1782489809478.png" class="menu-img ads" onclick="changePage(openAds)">
-<img src="1782489961499.png" class="menu-img leaders" onclick="changePage(openLeaders)">
-<img src="1782490032975.png" class="menu-img games" onclick="changePage(openWithdraw)">
+<img src="1782489631217.png" class="menu-img withdraw" onclick="openPage('withdrawPage')">
+
+<img src="1782489809478.png" class="menu-img ads" onclick="openPage('adsPage')">
+
+<img src="1782489961499.png" class="menu-img leaders" onclick="openPage('leadersPage')">
+
+<img src="1782490032975.png" class="menu-img games" onclick="openPage('gamesPage')">
 
 </div>
 
@@ -180,6 +184,50 @@ function changePage(callback){
         callback();
     },250);
 }
+    <div id="homePage">
+
+<!-- كل محتواك الحالي يبقى HOME بدون تغيير -->
+
+</div>
+
+<!-- MINING -->
+<div id="miningPage" style="display:none;">
+<h2 style="text-align:center">Mining</h2>
+</div>
+
+<!-- WITHDRAW -->
+<div id="withdrawPage" style="display:none;">
+<h2 style="text-align:center">Withdraw</h2>
+</div>
+
+<!-- ADS -->
+<div id="adsPage" style="display:none;">
+<h2 style="text-align:center">Ads</h2>
+</div>
+
+<!-- LEADERS -->
+<div id="leadersPage" style="display:none;">
+<h2 style="text-align:center">Leaders</h2>
+</div>
+
+<!-- GAMES -->
+<div id="gamesPage" style="display:none;">
+
+<h2 style="text-align:center">🎮 Games</h2>
+
+<div style="width:90%;margin:20px auto;background:#0b1023;
+border-radius:20px;text-align:center;cursor:pointer"
+onclick="openMines()">
+
+<img src="1782489809478.png"
+style="width:100%;height:160px;object-fit:cover;border-radius:20px">
+
+<h3>لعبة الالغام</h3>
+
+</div>
+
+</div>
+    
   </script>
   
 </body>
