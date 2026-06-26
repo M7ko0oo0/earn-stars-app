@@ -65,7 +65,7 @@ font-weight:bold;
 text-shadow:0 0 10px rgba(255,215,0,.4);
 }
 
-/* ===== الشبكة (التصميم المطلوب) ===== */
+/* ===== الشبكة ===== */
 .menu-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -83,14 +83,9 @@ margin-top:25px;
 .games{ grid-area:games; height:140px; }
 .ads{ grid-area:ads; height:140px; }
 .leaders{ grid-area:leaders; height:140px; }
+.withdraw{ grid-area:withdraw; height:160px; }
 
-/* السحب بعرض كامل */
-.withdraw{
-grid-area:withdraw;
-height:160px;
-}
-
-/* الصور */
+/* ===== الصور + أنيميشن دخول ===== */
 .menu-img{
 width:100%;
 height:100%;
@@ -101,15 +96,35 @@ transition:.2s;
 object-fit:cover;
 box-shadow:0 0 12px rgba(0,0,0,.35);
 
-/* ✨ دخول الأنيميشن */
+/* دخول ناعم */
 opacity:0;
 transform:translateY(20px);
 animation:cardIn .6s ease forwards;
 }
 
+/* hover */
 .menu-img:hover{
 transform:scale(1.05);
-  }
+}
+
+/* تأخير الدخول */
+.mining{ animation-delay:0.1s; }
+.games{ animation-delay:0.2s; }
+.ads{ animation-delay:0.3s; }
+.leaders{ animation-delay:0.4s; }
+.withdraw{ animation-delay:0.5s; }
+
+/* الحركة */
+@keyframes cardIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 
 /* ===== الشريط السفلي ===== */
 .bottom-nav{
@@ -150,4 +165,4 @@ margin-bottom:3px;
 
 .bottom-nav button.active{
 color:#ffd54a;
-}
+  }
