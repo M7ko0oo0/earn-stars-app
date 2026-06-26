@@ -100,11 +100,16 @@ cursor:pointer;
 transition:.2s;
 object-fit:cover;
 box-shadow:0 0 12px rgba(0,0,0,.35);
+
+/* ✨ دخول الأنيميشن */
+opacity:0;
+transform:translateY(20px);
+animation:cardIn .6s ease forwards;
 }
 
 .menu-img:hover{
 transform:scale(1.05);
-}
+  }
 
 /* ===== الشريط السفلي ===== */
 .bottom-nav{
