@@ -27,27 +27,29 @@ font-size:20px;
 background:#0b1023;
 }
 
-#app{
+/* الصفحات */
+.page{
+display:none;
 padding:20px;
-padding-bottom:90px;
 }
 
-/* ⭐ STAR CARD */
+.page.active{
+display:block;
+}
+
+/* الصفحة الرئيسية */
 .star-card{
 width:90%;
 height:200px;
 margin:20px auto;
 border-radius:20px;
-
 background-image:url("./1782246911197.png");
 background-size:cover;
 background-position:center;
-
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-
 position:relative;
 overflow:hidden;
 }
@@ -59,12 +61,6 @@ inset:0;
 background:rgba(0,0,0,.5);
 }
 
-.star-card h2,
-.stars-box{
-position:relative;
-z-index:1;
-}
-
 .stars-box{
 margin-top:10px;
 font-size:26px;
@@ -72,8 +68,7 @@ color:gold;
 font-weight:bold;
 }
 
-/* ===== الشبكة (بعد التبديل) ===== */
-
+/* الشبكة */
 .menu-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -81,68 +76,45 @@ grid-template-areas:
 "mining withdraw"
 "ads leaders"
 "games games";
-
 gap:15px;
 margin-top:25px;
 }
 
-/* ربط العناصر */
 .mining{ grid-area:mining; height:140px; }
-.games{ grid-area:games; height:160px; }
+.withdraw{ grid-area:withdraw; height:140px; }
 .ads{ grid-area:ads; height:140px; }
 .leaders{ grid-area:leaders; height:140px; }
+.games{ grid-area:games; height:160px; }
 
-.withdraw{ grid-area:withdraw; height:140px; }
-
-/* الصور */
 .menu-img{
 width:100%;
 height:100%;
 display:block;
 border-radius:20px;
+object-fit:cover;
 cursor:pointer;
 transition:.2s;
-object-fit:cover;
-box-shadow:0 0 12px rgba(0,0,0,.35);
 }
 
 .menu-img:hover{
 transform:scale(1.05);
 }
 
-/* ===== الشريط السفلي ===== */
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-height:70px;
+/* لعبة */
+.game-box{
+width:90%;
+margin:20px auto;
 background:#0b1023;
-display:flex;
-justify-content:space-around;
-align-items:center;
-border-top:1px solid rgba(255,255,255,.08);
-}
-
-.bottom-nav button{
-background:none;
-border:none;
-color:#cfcfcf;
-display:flex;
-flex-direction:column;
-align-items:center;
-font-size:11px;
+border-radius:20px;
+text-align:center;
 cursor:pointer;
+overflow:hidden;
 }
 
-.bottom-nav i{
-font-size:20px;
-margin-bottom:3px;
-}
-
-.bottom-nav button.active{
-color:#ffd54a;
+.game-box img{
+width:100%;
+height:160px;
+object-fit:cover;
 }
 
 </style>
@@ -152,16 +124,17 @@ color:#ffd54a;
 
 <div class="header">⭐ Earn Stars</div>
 
-<div id="app">
+<!-- HOME -->
+<div id="homePage" class="page active">
 
 <div class="star-card">
-<h2 class="title">رصيد النجوم</h2>
-<h2 id="userName">User</h2>
-<div class="stars-box">⭐ <span id="starsCount">0</span></div>
+<h2>رصيد النجوم</h2>
+<h2>User</h2>
+<div class="stars-box">⭐ 0</div>
 </div>
 
 <div class="menu-grid">
-  
+
 <img src="1782489572846.png" class="menu-img mining" onclick="openPage('miningPage')">
 
 <img src="1782489631217.png" class="menu-img withdraw" onclick="openPage('withdrawPage')">
@@ -176,59 +149,54 @@ color:#ffd54a;
 
 </div>
 
-  <script>
-function changePage(callback){
-    document.body.classList.add("fade-out");
-
-    setTimeout(function(){
-        callback();
-    },250);
-}
-    <div id="homePage">
-
-<!-- كل محتواك الحالي يبقى HOME بدون تغيير -->
-
-</div>
-
 <!-- MINING -->
-<div id="miningPage" style="display:none;">
+<div id="miningPage" class="page">
 <h2 style="text-align:center">Mining</h2>
 </div>
 
 <!-- WITHDRAW -->
-<div id="withdrawPage" style="display:none;">
+<div id="withdrawPage" class="page">
 <h2 style="text-align:center">Withdraw</h2>
 </div>
 
 <!-- ADS -->
-<div id="adsPage" style="display:none;">
+<div id="adsPage" class="page">
 <h2 style="text-align:center">Ads</h2>
 </div>
 
 <!-- LEADERS -->
-<div id="leadersPage" style="display:none;">
+<div id="leadersPage" class="page">
 <h2 style="text-align:center">Leaders</h2>
 </div>
 
 <!-- GAMES -->
-<div id="gamesPage" style="display:none;">
+<div id="gamesPage" class="page">
 
 <h2 style="text-align:center">🎮 Games</h2>
 
-<div style="width:90%;margin:20px auto;background:#0b1023;
-border-radius:20px;text-align:center;cursor:pointer"
-onclick="openMines()">
-
-<img src="1782489809478.png"
-style="width:100%;height:160px;object-fit:cover;border-radius:20px">
-
+<div class="game-box" onclick="openMines()">
+<img src="1782489809478.png">
 <h3>لعبة الالغام</h3>
-
 </div>
 
 </div>
-    
-  </script>
-  
+
+<script>
+
+function openPage(id){
+
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+}
+
+function openMines(){
+  window.location.href = "games.html";
+}
+
+</script>
+
 </body>
 </html>
