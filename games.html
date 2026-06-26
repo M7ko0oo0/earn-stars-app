@@ -1,1 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Earn Stars - Mines</title>
+
+<link rel="stylesheet" href="games.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+body{
+background:#050816;
+color:#fff;
+overflow-x:hidden;
+}
+
+button,
+input,
+select{
+font-family:sans-serif;
+outline:none;
+border:none;
+}
+
+button{
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+
+<header class="top-bar">
+
+<button class="back-btn" onclick="history.back()">
+←
+</button>
+
+<h2 class="page-title">
+💣 Mines
+</h2>
+
+<div class="stars-box">
+
+<span id="userStars">
+0
+</span>
+
+<span>
+⭐
+</span>
+
+</div>
+
+</header>
+
+<section class="control-card">
+
+<h3>
+بدء جولة جديدة
+</h3>
+
+<div class="input-group">
+
+<label>
+قيمة الرهان
+</label>
+
+<input
+type="number"
+id="betAmount"
+value="10"
+min="1">
+
+</div>
+
+<div class="input-group">
+
+<label>
+عدد الألغام
+</label>
+
+<select id="mineCount">
+
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+
+</select>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<span>
+المضاعف
+</span>
+
+<b id="multiplier">
+1.00x
+</b>
+
+</div>
+
+<div class="stat">
+
+<span>
+الربح
+</span>
+
+<b id="profit">
+0
+</b>
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button
+class="start-btn"
+onclick="startGame()">
+
+ابدأ اللعبة
+
+</button>
+
+<button
+class="cashout-btn"
+onclick="cashOut()">
+
+سحب الأرباح
+
+</button>
+
+</div>
+
+</section>
+
+<section class="game-area">
+
+<div id="gameBoard" class="board">
+  
+<!-- الصف الأول -->
+<div class="cell" data-index="0"></div>
+<div class="cell" data-index="1"></div>
+<div class="cell" data-index="2"></div>
+<div class="cell" data-index="3"></div>
+
+<!-- الصف الثاني -->
+<div class="cell" data-index="4"></div>
+<div class="cell" data-index="5"></div>
+<div class="cell" data-index="6"></div>
+<div class="cell" data-index="7"></div>
+
+<!-- الصف الثالث -->
+<div class="cell" data-index="8"></div>
+<div class="cell" data-index="9"></div>
+<div class="cell" data-index="10"></div>
+<div class="cell" data-index="11"></div>
+
+<!-- الصف الرابع -->
+<div class="cell" data-index="12"></div>
+<div class="cell" data-index="13"></div>
+<div class="cell" data-index="14"></div>
+<div class="cell" data-index="15"></div>
+
+</div>
+
+</section>
+
+<section class="game-info">
+
+<div class="info-card">
+
+<div class="info-row">
+<span>الحالة</span>
+<b id="gameStatus">
+بانتظار بدء اللعبة
+</b>
+</div>
+
+<div class="info-row">
+<span>المربعات المفتوحة</span>
+<b id="openedCells">
+0 / 16
+</b>
+</div>
+
+<div class="info-row">
+<span>الألغام</span>
+<b id="mineText">
+0
+</b>
+</div>
+
+<div class="info-row">
+<span>النجوم</span>
+<b id="starText">
+0
+</b>
+</div>
+
+</div>
+
+</section>
+
+<script src="games.js"></script>
+
+</body>
+  </html>
