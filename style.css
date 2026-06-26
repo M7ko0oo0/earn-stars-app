@@ -115,3 +115,8 @@ margin-bottom:3px;
 .bottom-nav button.active{
 color:#ffd54a;
 }
+
+.ads,
+.leaders{
+    margin-top: -45px;
+}
